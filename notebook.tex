@@ -1,0 +1,1123 @@
+
+% Default to the notebook output style
+
+    
+
+
+% Inherit from the specified cell style.
+
+
+
+
+    
+\documentclass[11pt]{article}
+
+    
+    
+    \usepackage[T1]{fontenc}
+    % Nicer default font (+ math font) than Computer Modern for most use cases
+    \usepackage{mathpazo}
+
+    % Basic figure setup, for now with no caption control since it's done
+    % automatically by Pandoc (which extracts ![](path) syntax from Markdown).
+    \usepackage{graphicx}
+    % We will generate all images so they have a width \maxwidth. This means
+    % that they will get their normal width if they fit onto the page, but
+    % are scaled down if they would overflow the margins.
+    \makeatletter
+    \def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth
+    \else\Gin@nat@width\fi}
+    \makeatother
+    \let\Oldincludegraphics\includegraphics
+    % Set max figure width to be 80% of text width, for now hardcoded.
+    \renewcommand{\includegraphics}[1]{\Oldincludegraphics[width=.8\maxwidth]{#1}}
+    % Ensure that by default, figures have no caption (until we provide a
+    % proper Figure object with a Caption API and a way to capture that
+    % in the conversion process - todo).
+    \usepackage{caption}
+    \DeclareCaptionLabelFormat{nolabel}{}
+    \captionsetup{labelformat=nolabel}
+
+    \usepackage{adjustbox} % Used to constrain images to a maximum size 
+    \usepackage{xcolor} % Allow colors to be defined
+    \usepackage{enumerate} % Needed for markdown enumerations to work
+    \usepackage{geometry} % Used to adjust the document margins
+    \usepackage{amsmath} % Equations
+    \usepackage{amssymb} % Equations
+    \usepackage{textcomp} % defines textquotesingle
+    % Hack from http://tex.stackexchange.com/a/47451/13684:
+    \AtBeginDocument{%
+        \def\PYZsq{\textquotesingle}% Upright quotes in Pygmentized code
+    }
+    \usepackage{upquote} % Upright quotes for verbatim code
+    \usepackage{eurosym} % defines \euro
+    \usepackage[mathletters]{ucs} % Extended unicode (utf-8) support
+    \usepackage[utf8x]{inputenc} % Allow utf-8 characters in the tex document
+    \usepackage{fancyvrb} % verbatim replacement that allows latex
+    \usepackage{grffile} % extends the file name processing of package graphics 
+                         % to support a larger range 
+    % The hyperref package gives us a pdf with properly built
+    % internal navigation ('pdf bookmarks' for the table of contents,
+    % internal cross-reference links, web links for URLs, etc.)
+    \usepackage{hyperref}
+    \usepackage{longtable} % longtable support required by pandoc >1.10
+    \usepackage{booktabs}  % table support for pandoc > 1.12.2
+    \usepackage[inline]{enumitem} % IRkernel/repr support (it uses the enumerate* environment)
+    \usepackage[normalem]{ulem} % ulem is needed to support strikethroughs (\sout)
+                                % normalem makes italics be italics, not underlines
+    
+
+    
+    
+    % Colors for the hyperref package
+    \definecolor{urlcolor}{rgb}{0,.145,.698}
+    \definecolor{linkcolor}{rgb}{.71,0.21,0.01}
+    \definecolor{citecolor}{rgb}{.12,.54,.11}
+
+    % ANSI colors
+    \definecolor{ansi-black}{HTML}{3E424D}
+    \definecolor{ansi-black-intense}{HTML}{282C36}
+    \definecolor{ansi-red}{HTML}{E75C58}
+    \definecolor{ansi-red-intense}{HTML}{B22B31}
+    \definecolor{ansi-green}{HTML}{00A250}
+    \definecolor{ansi-green-intense}{HTML}{007427}
+    \definecolor{ansi-yellow}{HTML}{DDB62B}
+    \definecolor{ansi-yellow-intense}{HTML}{B27D12}
+    \definecolor{ansi-blue}{HTML}{208FFB}
+    \definecolor{ansi-blue-intense}{HTML}{0065CA}
+    \definecolor{ansi-magenta}{HTML}{D160C4}
+    \definecolor{ansi-magenta-intense}{HTML}{A03196}
+    \definecolor{ansi-cyan}{HTML}{60C6C8}
+    \definecolor{ansi-cyan-intense}{HTML}{258F8F}
+    \definecolor{ansi-white}{HTML}{C5C1B4}
+    \definecolor{ansi-white-intense}{HTML}{A1A6B2}
+
+    % commands and environments needed by pandoc snippets
+    % extracted from the output of `pandoc -s`
+    \providecommand{\tightlist}{%
+      \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+    \DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+    % Add ',fontsize=\small' for more characters per line
+    \newenvironment{Shaded}{}{}
+    \newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.56,0.13,0.00}{{#1}}}
+    \newcommand{\DecValTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\FloatTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\CharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\StringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\CommentTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textit{{#1}}}}
+    \newcommand{\OtherTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{{#1}}}
+    \newcommand{\AlertTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.02,0.16,0.49}{{#1}}}
+    \newcommand{\RegionMarkerTok}[1]{{#1}}
+    \newcommand{\ErrorTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\NormalTok}[1]{{#1}}
+    
+    % Additional commands for more recent versions of Pandoc
+    \newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.53,0.00,0.00}{{#1}}}
+    \newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.73,0.40,0.53}{{#1}}}
+    \newcommand{\ImportTok}[1]{{#1}}
+    \newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.73,0.13,0.13}{\textit{{#1}}}}
+    \newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\VariableTok}[1]{\textcolor[rgb]{0.10,0.09,0.49}{{#1}}}
+    \newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.40,0.40,0.40}{{#1}}}
+    \newcommand{\BuiltInTok}[1]{{#1}}
+    \newcommand{\ExtensionTok}[1]{{#1}}
+    \newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.74,0.48,0.00}{{#1}}}
+    \newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.49,0.56,0.16}{{#1}}}
+    \newcommand{\InformationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\WarningTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    
+    
+    % Define a nice break command that doesn't care if a line doesn't already
+    % exist.
+    \def\br{\hspace*{\fill} \\* }
+    % Math Jax compatability definitions
+    \def\gt{>}
+    \def\lt{<}
+    % Document parameters
+    \title{Milestone1}
+    
+    
+    
+
+    % Pygments definitions
+    
+\makeatletter
+\def\PY@reset{\let\PY@it=\relax \let\PY@bf=\relax%
+    \let\PY@ul=\relax \let\PY@tc=\relax%
+    \let\PY@bc=\relax \let\PY@ff=\relax}
+\def\PY@tok#1{\csname PY@tok@#1\endcsname}
+\def\PY@toks#1+{\ifx\relax#1\empty\else%
+    \PY@tok{#1}\expandafter\PY@toks\fi}
+\def\PY@do#1{\PY@bc{\PY@tc{\PY@ul{%
+    \PY@it{\PY@bf{\PY@ff{#1}}}}}}}
+\def\PY#1#2{\PY@reset\PY@toks#1+\relax+\PY@do{#2}}
+
+\expandafter\def\csname PY@tok@w\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.73,0.73}{##1}}}
+\expandafter\def\csname PY@tok@c\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.74,0.48,0.00}{##1}}}
+\expandafter\def\csname PY@tok@k\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.69,0.00,0.25}{##1}}}
+\expandafter\def\csname PY@tok@o\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ow\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@ne\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.82,0.25,0.23}{##1}}}
+\expandafter\def\csname PY@tok@nv\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@no\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ni\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.60,0.60,0.60}{##1}}}
+\expandafter\def\csname PY@tok@na\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.49,0.56,0.16}{##1}}}
+\expandafter\def\csname PY@tok@nt\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@s\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sd\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@si\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@se\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sr\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@ss\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sx\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@m\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@gh\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gu\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.50,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gr\endcsname{\def\PY@tc##1{\textcolor[rgb]{1.00,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ge\endcsname{\let\PY@it=\textit}
+\expandafter\def\csname PY@tok@gs\endcsname{\let\PY@bf=\textbf}
+\expandafter\def\csname PY@tok@gp\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@go\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.53,0.53}{##1}}}
+\expandafter\def\csname PY@tok@gt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.27,0.87}{##1}}}
+\expandafter\def\csname PY@tok@err\endcsname{\def\PY@bc##1{\setlength{\fboxsep}{0pt}\fcolorbox[rgb]{1.00,0.00,0.00}{1,1,1}{\strut ##1}}}
+\expandafter\def\csname PY@tok@kc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kd\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kr\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@bp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@fm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@vc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vg\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sa\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@dl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s2\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s1\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@mb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@il\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mo\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ch\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cm\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cpf\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@c1\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cs\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+
+\def\PYZbs{\char`\\}
+\def\PYZus{\char`\_}
+\def\PYZob{\char`\{}
+\def\PYZcb{\char`\}}
+\def\PYZca{\char`\^}
+\def\PYZam{\char`\&}
+\def\PYZlt{\char`\<}
+\def\PYZgt{\char`\>}
+\def\PYZsh{\char`\#}
+\def\PYZpc{\char`\%}
+\def\PYZdl{\char`\$}
+\def\PYZhy{\char`\-}
+\def\PYZsq{\char`\'}
+\def\PYZdq{\char`\"}
+\def\PYZti{\char`\~}
+% for compatibility with earlier versions
+\def\PYZat{@}
+\def\PYZlb{[}
+\def\PYZrb{]}
+\makeatother
+
+
+    % Exact colors from NB
+    \definecolor{incolor}{rgb}{0.0, 0.0, 0.5}
+    \definecolor{outcolor}{rgb}{0.545, 0.0, 0.0}
+
+
+
+    
+    % Prevent overflowing lines due to hard-to-break entities
+    \sloppy 
+    % Setup hyperref package
+    \hypersetup{
+      breaklinks=true,  % so long urls are correctly broken across lines
+      colorlinks=true,
+      urlcolor=urlcolor,
+      linkcolor=linkcolor,
+      citecolor=citecolor,
+      }
+    % Slightly bigger margins than the latex defaults
+    
+    \geometry{verbose,tmargin=1in,bmargin=1in,lmargin=1in,rmargin=1in}
+    
+    
+
+    \begin{document}
+    
+    
+    \maketitle
+    
+    
+
+    
+    Twitter Sentimental Analysis
+
+    Abstract
+
+The goal of this project was to predict sentiment for the given Twitter
+post using Python. Sentiment Analysis is the process of
+`computationally' determining whether a piece of writing is positive,
+negative or neutral. It's also known as opinion mining, deriving the
+opinion or attitude of a speaker.In this project we only focus on two
+major fields positive and negative. We had a complete dataset of 2500000
+tweets. One half of tweets are positive labels and the other half are
+negative labels Our task was to build a classifier to predict the test
+dataset of 10000 tweets.
+
+    Data Loading
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}1}]:} \PY{k+kn}{import} \PY{n+nn}{pandas} \PY{k}{as} \PY{n+nn}{pd}
+        
+        \PY{c+c1}{\PYZsh{}helper function to Generate data}
+        \PY{k}{def} \PY{n+nf}{load\PYZus{}data}\PY{p}{(}\PY{n}{filename}\PY{p}{)}\PY{p}{:}
+            \PY{n}{data} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+            \PY{k}{for} \PY{n}{line} \PY{o+ow}{in} \PY{n+nb}{open}\PY{p}{(}\PY{n}{filename}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{r}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}\PY{p}{:}
+                \PY{n}{data}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{line}\PY{p}{)}
+            \PY{k}{return} \PY{n}{data}    
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}2}]:} \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{ == Loading Tranning Data ==}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+        \PY{n}{pos\PYZus{}train\PYZus{}tweets} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{DataFrame}\PY{p}{(}\PY{n}{load\PYZus{}data}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{data/tweets/train\PYZus{}pos\PYZus{}full.txt}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{,} \PY{n}{columns}\PY{o}{=}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{tweet}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}
+        \PY{n}{neg\PYZus{}train\PYZus{}tweets} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{DataFrame}\PY{p}{(}\PY{n}{load\PYZus{}data}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{data/tweets/train\PYZus{}neg\PYZus{}full.txt}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{,} \PY{n}{columns}\PY{o}{=}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{tweet}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}
+        \PY{n}{train\PYZus{}tweets} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{concat}\PY{p}{(}\PY{p}{[}\PY{n}{pos\PYZus{}train\PYZus{}tweets}\PY{p}{,} \PY{n}{neg\PYZus{}train\PYZus{}tweets}\PY{p}{]}\PY{p}{,} \PY{n}{axis}\PY{o}{=}\PY{l+m+mi}{0}\PY{p}{)}
+        \PY{n+nb}{print}\PY{p}{(}\PY{n}{train\PYZus{}tweets}\PY{p}{)}
+        \PY{n}{train\PYZus{}tweets}\PY{o}{.}\PY{n}{to\PYZus{}pickle}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{data/pickles/train\PYZus{}origin.pkl}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+ == Loading Tranning Data ==
+                                                     tweet
+0        <user> i dunno justin read my mention or not {\ldots}
+1        because your logic is so dumb , i won't even c{\ldots}
+2        " <user> just put casper in a box ! " looved t{\ldots}
+3        <user> <user> thanks sir > > don't trip lil ma{\ldots}
+4        visiting my brother tmr is the bestest birthda{\ldots}
+5        <user> yay ! ! \#lifecompleted . tweet / facebo{\ldots}
+6        <user> \#1dnextalbumtitle : feel for you / roll{\ldots}
+7        workin hard or hardly workin rt <user> at hard{\ldots}
+8             <user> i saw . i'll be replying in a bit .\textbackslash{}n
+9                                  this is were i belong\textbackslash{}n
+10                <user> anddd to cheer \#nationals2013 ?\textbackslash{}n
+11       we send an invitation to shop on-line ! here y{\ldots}
+12                     just woke up , finna go to church\textbackslash{}n
+13                 <user> agreed ! 12 more days left tho\textbackslash{}n
+14                                   monet with katemelo\textbackslash{}n
+15       like dammm <user> lexis u got a lot to say whe{\ldots}
+16       grateful today for a dream fulfilled ! ! my he{\ldots}
+17              <user> at home affairs shall do it later\textbackslash{}n
+18        barca bout to beat real madrid on saturday doe\textbackslash{}n
+19       <user> a lot of parts of asia . especially rat{\ldots}
+20       <user> <user> i wasn't even sleeping . so shut{\ldots}
+21                       i have the worlds best dad . <3\textbackslash{}n
+22       <user> <user> ab jaeyay werna meeting khatam h{\ldots}
+23                   <user> no one doubts that ability !\textbackslash{}n
+24       <user> check my tweet pic out . that was the o{\ldots}
+25       just got my mid-term and i'm impressed ! ! \#ha{\ldots}
+26       my summer days : 1 . ) work from 10:30- 2:30 i{\ldots}
+27                  <user> lol nooo .. food is ur friend\textbackslash{}n
+28              <user> \#16millionbritneyfan rt and tweet\textbackslash{}n
+29       <user> but seriously though .. it's called van{\ldots}
+{\ldots}                                                    {\ldots}
+1249970  need to go to the library but sounds like hell{\ldots}
+1249971  <user> miss you lil sis . you just left me all{\ldots}
+1249972  silver alert issued for elderly leesburg man ({\ldots}
+1249973     just finished the game . leg hurts like crap\textbackslash{}n
+1249974                  i waaant this jeep so bad <url>\textbackslash{}n
+1249975      so sad my phone cannot download twitter ahh\textbackslash{}n
+1249976  i have a mother 2 remember " <user> <user> she{\ldots}
+1249977  extremal combinatorics : with applications in {\ldots}
+1249978  african presence in early america ( paperback {\ldots}
+1249979  i'm really sad about charlotte though . she ha{\ldots}
+1249980  didn't know keeping fit was so difficult ! str{\ldots}
+1249981  <user> dont know yet al let you know ! am knac{\ldots}
+1249982                            i wish that i had vip\textbackslash{}n
+1249983  so sad so dang lonely {\ldots} i guess my best isn'{\ldots}
+1249984        <user> ohhh im sure it'll be on youtube !\textbackslash{}n
+1249985  tomarrow we would have to do the " impossible {\ldots}
+1249986  <user> hell yeah and my.phone is huge it hurt {\ldots}
+1249987  <user> i really wish i could be in london now {\ldots}
+1249988  <user> i know , i can't help it though - i've {\ldots}
+1249989  <user> not funny , but i guess its better than{\ldots}
+1249990  my abs are sooo sore . that's what i get for t{\ldots}
+1249991  market sellers " <user> wah movie ? " <user> l{\ldots}
+1249992                     <user> let's go there <user>\textbackslash{}n
+1249993  <user> haaarryyy seriously , when are you foll{\ldots}
+1249994  st . croix avid casting rods model : avc 70mf {\ldots}
+1249995  im so sorry ! <user> \& to <user> \& <user> u gu{\ldots}
+1249996              i can't find food coloring anywhere\textbackslash{}n
+1249997  <user> same here ! ! but tort ! ! wonder why y{\ldots}
+1249998  keyless entry remote fob clicker for 2005 buic{\ldots}
+1249999  <user> yeap . doctor don't know what's wrong w{\ldots}
+
+[2500000 rows x 1 columns]
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}3}]:} \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{ == Loading Testing Data ==}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+        \PY{n}{test\PYZus{}tweets} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{DataFrame}\PY{p}{(}\PY{n}{load\PYZus{}data}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{data/tweets/test\PYZus{}data.txt}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{,} \PY{n}{columns}\PY{o}{=}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{tweet}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}
+        \PY{n}{test\PYZus{}tweets}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{tweet}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{n}{test\PYZus{}tweets}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{tweet}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{apply}\PY{p}{(}\PY{k}{lambda} \PY{n}{tweet}\PY{p}{:} \PY{n}{tweet}\PY{o}{.}\PY{n}{split}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{,}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{)}\PY{p}{[}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{)}
+        \PY{n+nb}{print}\PY{p}{(}\PY{n}{test\PYZus{}tweets}\PY{p}{)}
+        \PY{n}{test\PYZus{}tweets}\PY{o}{.}\PY{n}{to\PYZus{}pickle}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{data/pickles/test\PYZus{}origin.pkl}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+ == Loading Testing Data ==
+                                                  tweet
+0     sea doo pro sea scooter ( sports with the port{\ldots}
+1     <user> shucks well i work all week so now i ca{\ldots}
+2             i cant stay away from bug thats my baby\textbackslash{}n
+3     <user> no ma'am ! ! ! lol im perfectly fine an{\ldots}
+4     whenever i fall asleep watching the tv , i alw{\ldots}
+5     <user> he needs to get rid of that thing ! it {\ldots}
+6               its whatever . in a terrible mood ( (\textbackslash{}n
+7     yesss ! rt <user> <user> thanks jordan , i lov{\ldots}
+8     my friend <user> text me to check up on me las{\ldots}
+9     <user> \#followback please . when will ur \#unit{\ldots}
+10    watch some of y'all dumb asses get lock up tod{\ldots}
+11    obsessed with \#phasell <user> you killed it ! {\ldots}
+12    <user> robert de niro is not gay .. but with a{\ldots}
+13    <user> canada have to do it in grade 12 . but {\ldots}
+14    <user> please say hi to denmark ! that would b{\ldots}
+15                                finally am home now\textbackslash{}n
+16    3x3 custom picture frame / poster frame 1.2 " {\ldots}
+17    s / o to my new followers . mention me for a f{\ldots}
+18    <user> yep , looks like the best team will sta{\ldots}
+19    nhl's bettman : suspension criticism ' gamesma{\ldots}
+20    <user> no way i'm pro andd <user> lool she is {\ldots}
+21    barrel pickles ( 2.2 pound these german pickle{\ldots}
+22    i completed a whole cup of tea today at jessic{\ldots}
+23    expo precision point whiteboard eraser (8 473k{\ldots}
+24    \#yougetmajorpointsif you play soccer . idc abo{\ldots}
+25    task essentials harness leather scribe keepers{\ldots}
+26    <user> \#needtoreesthisshit \#shouldhavereaditwi{\ldots}
+27    <user> hahahaha ok , i'll come over , tons of {\ldots}
+28    laurie's garden design protective decal skin s{\ldots}
+29                      <user> no way he's mine ! ! !\textbackslash{}n
+{\ldots}                                                 {\ldots}
+9970  it's clear that these new goths are learning t{\ldots}
+9971  it's clear that these new goths are learning t{\ldots}
+9972  another day at home sick , can this be over al{\ldots}
+9973  <user> 1 of your own wee golden nuggets there {\ldots}
+9974  <user> all disney movies are classic films the{\ldots}
+9975  09x30 custom picture frame / poster frame 1.26{\ldots}
+9976  09x30 custom picture frame / poster frame 1.26{\ldots}
+9977                    <user> glad it arrived safely\textbackslash{}n
+9978  im not gonna care if ur not going to either i'{\ldots}
+9979  monk - season four ( dvd return to the scene o{\ldots}
+9980  i want to wish my beautiful cousin <user> a ha{\ldots}
+9981  rt <user> the first rule of sex is , there is {\ldots}
+9982  stay as u are darla , , rt <user> i know hahah{\ldots}
+9983  <user> " <user> most embarrassing thing thats {\ldots}
+9984  i wonder if <user> will ever \#followback ? pro{\ldots}
+9985  i wonder if <user> will ever \#followback ? pro{\ldots}
+9986  anaheim ducks cake cupcake toppers ( 12 pack a{\ldots}
+9987        shoutout to <user> go follow her guys ! x\textbackslash{}n
+9988  <user> .. good morning brother , .. noon in en{\ldots}
+9989  you're welcome mr.bruce , tell him kun rt <use{\ldots}
+9990                 <user> follow me back please ! !\textbackslash{}n
+9991  <user> omg ! i screamed at the end ! that's am{\ldots}
+9992  aww that's dissapointing that i can't make my {\ldots}
+9993                          <user> thankyouu po ! )\textbackslash{}n
+9994  <user> i'm afraid you're coming back to a lot {\ldots}
+9995           had a nice time w / my friend lastnite\textbackslash{}n
+9996               <user> no it's not ! please stop !\textbackslash{}n
+9997  not without my daughter ( dvd two-time oscar ({\ldots}
+9998             <user> have fun in class sweetcheeks\textbackslash{}n
+9999  making a r . e . a . l . difference . ( get r {\ldots}
+
+[10000 rows x 1 columns]
+
+    \end{Verbatim}
+
+    Segmenter
+
+Helper function for preprocessing step. It Counts the frequencies for
+total words present in corpus. And there respective frequencies. Total
+frequency is saved in {"data/dicitonary/en/total.tsv"} while respictive
+frequency are saved in {"data/dicitonary/en/frequencies.tsv"}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}4}]:} \PY{k+kn}{import} \PY{n+nn}{os}
+        
+        \PY{k}{class} \PY{n+nc}{Analyzer}\PY{p}{(}\PY{n+nb}{object}\PY{p}{)}\PY{p}{:}
+            \PY{k}{def} \PY{n+nf}{\PYZus{}\PYZus{}init\PYZus{}\PYZus{}}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{,}\PY{n}{file\PYZus{}dir}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{data/dictionary/en}\PY{l+s+s2}{\PYZdq{}} \PY{p}{,} \PY{n}{case\PYZus{}folding}\PY{o}{=}\PY{k+kc}{True}\PY{p}{,} \PY{n}{minimum\PYZus{}frequency}\PY{o}{=}\PY{l+m+mf}{1.0e\PYZhy{}08}\PY{p}{)}\PY{p}{:}
+                \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{frequencies} \PY{o}{=} \PY{n+nb}{dict}\PY{p}{(}\PY{p}{)}
+                \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{total} \PY{o}{=} \PY{l+m+mf}{0.0}
+                \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{minimum\PYZus{}frequency} \PY{o}{=} \PY{n}{minimum\PYZus{}frequency}
+                \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{file\PYZus{}dir} \PY{o}{=}\PY{n}{file\PYZus{}dir}
+                \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{total} \PY{o}{=} \PY{n+nb}{float}\PY{p}{(}\PY{n+nb}{open}\PY{p}{(}\PY{n}{file\PYZus{}dir} \PY{o}{+} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{/total.tsv}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}\PY{o}{.}\PY{n}{readlines}\PY{p}{(}\PY{p}{)}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{)}
+                \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{case\PYZus{}folding} \PY{o}{=} \PY{n}{case\PYZus{}folding}
+                \PY{n}{counts} \PY{o}{=} \PY{n+nb}{dict}\PY{p}{(}\PY{p}{)}
+                \PY{k}{for} \PY{n}{line} \PY{o+ow}{in} \PY{n+nb}{open}\PY{p}{(}\PY{n}{file\PYZus{}dir} \PY{o}{+} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{/frequencies.tsv}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}\PY{p}{:}
+                    \PY{n}{parts} \PY{o}{=} \PY{n}{line}\PY{o}{.}\PY{n}{strip}\PY{p}{(}\PY{p}{)}\PY{o}{.}\PY{n}{split}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+se}{\PYZbs{}t}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+                    \PY{k}{if} \PY{n+nb}{len}\PY{p}{(}\PY{n}{parts}\PY{p}{)} \PY{o}{==} \PY{l+m+mi}{2}\PY{p}{:}
+                        \PY{n}{word}\PY{p}{,} \PY{n}{count} \PY{o}{=} \PY{n}{parts}
+                        \PY{k}{if} \PY{n}{case\PYZus{}folding}\PY{p}{:}
+                            \PY{n}{key} \PY{o}{=} \PY{n}{word}\PY{o}{.}\PY{n}{lower}\PY{p}{(}\PY{p}{)}
+                        \PY{k}{else}\PY{p}{:}
+                            \PY{n}{key} \PY{o}{=} \PY{n}{word}
+                        \PY{n}{counts}\PY{p}{[}\PY{n}{key}\PY{p}{]} \PY{o}{=} \PY{n}{counts}\PY{o}{.}\PY{n}{get}\PY{p}{(}\PY{n}{word}\PY{p}{,} \PY{l+m+mf}{0.0}\PY{p}{)} \PY{o}{+} \PY{n+nb}{float}\PY{p}{(}\PY{n}{count}\PY{p}{)}
+                    \PY{k}{else}\PY{p}{:}
+                        \PY{k}{pass}
+        
+                \PY{k}{for} \PY{n}{key} \PY{o+ow}{in} \PY{n}{counts}\PY{p}{:}
+                    \PY{n}{frequency} \PY{o}{=} \PY{n}{counts}\PY{p}{[}\PY{n}{key}\PY{p}{]} \PY{o}{/} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{total}
+                    \PY{k}{if} \PY{n}{frequency} \PY{o}{\PYZgt{}}\PY{o}{=} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{minimum\PYZus{}frequency}\PY{p}{:}
+                        \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{frequencies}\PY{p}{[}\PY{n}{key}\PY{p}{]} \PY{o}{=} \PY{n}{frequency}
+        
+            \PY{k}{def} \PY{n+nf}{frequency}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{,} \PY{n}{word}\PY{p}{)}\PY{p}{:}
+                \PY{k}{return} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{frequencies}\PY{o}{.}\PY{n}{get}\PY{p}{(}\PY{n}{word}\PY{p}{,} \PY{l+m+mf}{0.0}\PY{p}{)}
+        
+            \PY{k}{def} \PY{n+nf}{segment}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{,} \PY{n}{text}\PY{p}{)}\PY{p}{:}
+                \PY{c+c1}{\PYZsh{} best[i] : best log probability for text[0:i]}
+                \PY{c+c1}{\PYZsh{} words[i] : best word ending at position i}
+                \PY{n}{original\PYZus{}text} \PY{o}{=} \PY{n}{text}
+                \PY{k}{if} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{case\PYZus{}folding}\PY{p}{:}
+                    \PY{n}{text} \PY{o}{=} \PY{n}{text}\PY{o}{.}\PY{n}{lower}\PY{p}{(}\PY{p}{)}
+                \PY{n}{n} \PY{o}{=} \PY{n+nb}{len}\PY{p}{(}\PY{n}{text}\PY{p}{)}
+                \PY{c+c1}{\PYZsh{} strings can be split into unicode chars using list}
+                \PY{n}{words} \PY{o}{=} \PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{+} \PY{n+nb}{list}\PY{p}{(}\PY{n}{text}\PY{p}{)}
+                \PY{n}{best} \PY{o}{=} \PY{p}{[}\PY{l+m+mf}{1.0}\PY{p}{]} \PY{o}{+} \PY{p}{[}\PY{l+m+mf}{0.0}\PY{p}{]} \PY{o}{*} \PY{n}{n}
+                \PY{c+c1}{\PYZsh{} fill in vectors best, words via dynamic programming}
+                \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n}{n} \PY{o}{+} \PY{l+m+mi}{1}\PY{p}{)}\PY{p}{:}
+                    \PY{k}{for} \PY{n}{j} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n}{i}\PY{p}{)}\PY{p}{:}
+                        \PY{n}{w} \PY{o}{=} \PY{n}{text}\PY{p}{[}\PY{n}{j}\PY{p}{:}\PY{n}{i}\PY{p}{]}
+                        \PY{n}{lp} \PY{o}{=} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{frequency}\PY{p}{(}\PY{n}{w}\PY{p}{)} \PY{o}{*} \PY{n}{best}\PY{p}{[}\PY{n}{i} \PY{o}{\PYZhy{}} \PY{n+nb}{len}\PY{p}{(}\PY{n}{w}\PY{p}{)}\PY{p}{]}
+                        \PY{k}{if} \PY{n}{lp} \PY{o}{\PYZgt{}}\PY{o}{=} \PY{n}{best}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{:}
+                            \PY{n}{best}\PY{p}{[}\PY{n}{i}\PY{p}{]} \PY{o}{=} \PY{n}{lp}
+                            \PY{n}{words}\PY{p}{[}\PY{n}{i}\PY{p}{]} \PY{o}{=} \PY{n}{original\PYZus{}text}\PY{p}{[}\PY{n}{j}\PY{p}{:}\PY{n}{i}\PY{p}{]}
+                \PY{c+c1}{\PYZsh{} now recover the sequence of best words}
+                \PY{n}{seq} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+                \PY{n}{i} \PY{o}{=} \PY{n+nb}{len}\PY{p}{(}\PY{n}{words}\PY{p}{)} \PY{o}{\PYZhy{}} \PY{l+m+mi}{1}
+                \PY{k}{while} \PY{n}{i} \PY{o}{\PYZgt{}} \PY{l+m+mi}{0}\PY{p}{:}
+                    \PY{c+c1}{\PYZsh{} prevent an infinite loop from occuring here}
+                    \PY{k}{if} \PY{n+nb}{len}\PY{p}{(}\PY{n}{words}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{)} \PY{o}{\PYZgt{}} \PY{l+m+mi}{0}\PY{p}{:}
+                        \PY{n}{seq}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{words}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{)}
+                        \PY{n}{i} \PY{o}{\PYZhy{}}\PY{o}{=} \PY{n+nb}{len}\PY{p}{(}\PY{n}{words}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{)}
+                    \PY{k}{else}\PY{p}{:}
+                        \PY{n}{i} \PY{o}{\PYZhy{}}\PY{o}{=} \PY{l+m+mi}{1}
+                \PY{c+c1}{\PYZsh{} reverse sequence}
+                \PY{k}{return} \PY{n}{seq}\PY{p}{[}\PY{p}{:}\PY{p}{:}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{]}
+\end{Verbatim}
+
+
+    Pre Processing
+
+User-generated content on the web is seldom present in a form usable for
+learning. It becomes important to normalize the text by applying a
+series of pre-processing steps. We have applied an extensive set of
+pre-processing steps to decrease the size of the feature set to make it
+suitable for learning algorithms.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}5}]:} \PY{k+kn}{import} \PY{n+nn}{numpy} \PY{k}{as} \PY{n+nn}{np}
+        \PY{k+kn}{import} \PY{n+nn}{regex} \PY{k}{as} \PY{n+nn}{re}
+        \PY{k+kn}{import} \PY{n+nn}{multiprocessing}
+        \PY{k+kn}{from} \PY{n+nn}{multiprocessing} \PY{k}{import} \PY{n}{Pool}
+        \PY{k+kn}{from} \PY{n+nn}{nltk}\PY{n+nn}{.}\PY{n+nn}{corpus} \PY{k}{import} \PY{n}{stopwords}
+        \PY{k+kn}{from} \PY{n+nn}{nltk}\PY{n+nn}{.}\PY{n+nn}{stem} \PY{k}{import} \PY{n}{WordNetLemmatizer}
+        \PY{k+kn}{from} \PY{n+nn}{nltk}\PY{n+nn}{.}\PY{n+nn}{stem}\PY{n+nn}{.}\PY{n+nn}{porter} \PY{k}{import} \PY{n}{PorterStemmer}
+        
+        \PY{n}{np}\PY{o}{.}\PY{n}{random}\PY{o}{.}\PY{n}{seed}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{)}
+        
+        \PY{c+c1}{\PYZsh{} Loading current instance resource}
+        \PY{n}{num\PYZus{}partitions} \PY{o}{=} \PY{n}{multiprocessing}\PY{o}{.}\PY{n}{cpu\PYZus{}count}\PY{p}{(}\PY{p}{)}
+        \PY{n}{num\PYZus{}cores} \PY{o}{=} \PY{n}{multiprocessing}\PY{o}{.}\PY{n}{cpu\PYZus{}count}\PY{p}{(}\PY{p}{)}
+        \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Total Number of Partitions : }\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{num\PYZus{}partitions}\PY{p}{)}
+        \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Total Number of cores : }\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{num\PYZus{}cores}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Total Number of Partitions :  4
+Total Number of cores :  4
+
+    \end{Verbatim}
+
+    \# Abbreviation Replacement
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}6}]:} \PY{k}{def} \PY{n+nf}{abbreviation\PYZus{}replacement}\PY{p}{(}\PY{n}{text}\PY{p}{)}\PY{p}{:}
+            \PY{n}{text} \PY{o}{=} \PY{n}{re}\PY{o}{.}\PY{n}{sub}\PY{p}{(}\PY{l+s+sa}{r}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{i}\PY{l+s+s2}{\PYZbs{}}\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{m}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{i am}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{text}\PY{p}{)}
+            \PY{n}{text} \PY{o}{=} \PY{n}{re}\PY{o}{.}\PY{n}{sub}\PY{p}{(}\PY{l+s+sa}{r}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{\PYZbs{}}\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{re}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{are}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{text}\PY{p}{)}
+            \PY{n}{text} \PY{o}{=} \PY{n}{re}\PY{o}{.}\PY{n}{sub}\PY{p}{(}\PY{l+s+sa}{r}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{he}\PY{l+s+s2}{\PYZbs{}}\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{s}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{he is}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{text}\PY{p}{)}
+            \PY{n}{text} \PY{o}{=} \PY{n}{re}\PY{o}{.}\PY{n}{sub}\PY{p}{(}\PY{l+s+sa}{r}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{it}\PY{l+s+s2}{\PYZbs{}}\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{s}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{it is}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{text}\PY{p}{)}
+            \PY{n}{text} \PY{o}{=} \PY{n}{re}\PY{o}{.}\PY{n}{sub}\PY{p}{(}\PY{l+s+sa}{r}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{that}\PY{l+s+s2}{\PYZbs{}}\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{s}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{that is}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{text}\PY{p}{)}
+            \PY{n}{text} \PY{o}{=} \PY{n}{re}\PY{o}{.}\PY{n}{sub}\PY{p}{(}\PY{l+s+sa}{r}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{who}\PY{l+s+s2}{\PYZbs{}}\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{s}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{who is}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{text}\PY{p}{)}
+            \PY{n}{text} \PY{o}{=} \PY{n}{re}\PY{o}{.}\PY{n}{sub}\PY{p}{(}\PY{l+s+sa}{r}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{what}\PY{l+s+s2}{\PYZbs{}}\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{s}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{what is}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{text}\PY{p}{)}
+            \PY{n}{text} \PY{o}{=} \PY{n}{re}\PY{o}{.}\PY{n}{sub}\PY{p}{(}\PY{l+s+sa}{r}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{n}\PY{l+s+s2}{\PYZbs{}}\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{t}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{not}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{text}\PY{p}{)}
+            \PY{n}{text} \PY{o}{=} \PY{n}{re}\PY{o}{.}\PY{n}{sub}\PY{p}{(}\PY{l+s+sa}{r}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{\PYZbs{}}\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{ve}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{have}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{text}\PY{p}{)}
+            \PY{n}{text} \PY{o}{=} \PY{n}{re}\PY{o}{.}\PY{n}{sub}\PY{p}{(}\PY{l+s+sa}{r}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{\PYZbs{}}\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{d}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{would}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{text}\PY{p}{)}
+            \PY{n}{text} \PY{o}{=} \PY{n}{re}\PY{o}{.}\PY{n}{sub}\PY{p}{(}\PY{l+s+sa}{r}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{\PYZbs{}}\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{ll}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{will}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{text}\PY{p}{)}
+            \PY{n}{text} \PY{o}{=} \PY{n}{re}\PY{o}{.}\PY{n}{sub}\PY{p}{(}\PY{l+s+sa}{r}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{,}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{ , }\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{text}\PY{p}{)}
+            \PY{n}{text} \PY{o}{=} \PY{n}{re}\PY{o}{.}\PY{n}{sub}\PY{p}{(}\PY{l+s+sa}{r}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{!}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{ ! }\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{text}\PY{p}{)}
+            \PY{n}{text} \PY{o}{=} \PY{n}{re}\PY{o}{.}\PY{n}{sub}\PY{p}{(}\PY{l+s+sa}{r}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{\PYZbs{}}\PY{l+s+s2}{.}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{ }\PY{l+s+s2}{\PYZbs{}}\PY{l+s+s2}{. }\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{text}\PY{p}{)}
+            \PY{n}{text} \PY{o}{=} \PY{n}{re}\PY{o}{.}\PY{n}{sub}\PY{p}{(}\PY{l+s+sa}{r}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{\PYZbs{}}\PY{l+s+s2}{(}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{ }\PY{l+s+s2}{\PYZbs{}}\PY{l+s+s2}{( }\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{text}\PY{p}{)}
+            \PY{n}{text} \PY{o}{=} \PY{n}{re}\PY{o}{.}\PY{n}{sub}\PY{p}{(}\PY{l+s+sa}{r}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{\PYZbs{}}\PY{l+s+s2}{)}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{ }\PY{l+s+s2}{\PYZbs{}}\PY{l+s+s2}{) }\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{text}\PY{p}{)}
+            \PY{n}{text} \PY{o}{=} \PY{n}{re}\PY{o}{.}\PY{n}{sub}\PY{p}{(}\PY{l+s+sa}{r}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{\PYZbs{}}\PY{l+s+s2}{?}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{ }\PY{l+s+s2}{\PYZbs{}}\PY{l+s+s2}{? }\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{text}\PY{p}{)}
+            \PY{k}{return} \PY{n}{text}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}8}]:} \PY{n}{abbreviation\PYZus{}replacement}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{i}\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{m afraid you}\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{re coming back to a lot}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}8}]:} 'i am afraid youare coming back to a lot'
+\end{Verbatim}
+            
+    \# Emoji Translation
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}9}]:} \PY{k}{def} \PY{n+nf}{emoji\PYZus{}translation}\PY{p}{(}\PY{n}{text}\PY{p}{)}\PY{p}{:}
+            \PY{n}{loves} \PY{o}{=} \PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{\PYZlt{}3}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{♥}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}
+            \PY{n}{smilefaces} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+            \PY{n}{sadfaces} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+            \PY{n}{neutralfaces} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+        
+            \PY{n}{eyes} \PY{o}{=} \PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{8}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{:}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{=}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{;}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}
+            \PY{n}{nose} \PY{o}{=} \PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{`}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{\PYZhy{}}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+sa}{r}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+se}{\PYZbs{}\PYZbs{}}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}
+            \PY{k}{for} \PY{n}{e} \PY{o+ow}{in} \PY{n}{eyes}\PY{p}{:}
+                \PY{k}{for} \PY{n}{n} \PY{o+ow}{in} \PY{n}{nose}\PY{p}{:}
+                    \PY{k}{for} \PY{n}{s} \PY{o+ow}{in} \PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{\PYZbs{}}\PY{l+s+s2}{)}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{d}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{]}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{\PYZcb{}}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{p}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{p}{:}
+                        \PY{n}{smilefaces}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{e}\PY{o}{+}\PY{n}{n}\PY{o}{+}\PY{n}{s}\PY{p}{)}
+                        \PY{n}{smilefaces}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{e}\PY{o}{+}\PY{n}{s}\PY{p}{)}
+                    \PY{k}{for} \PY{n}{s} \PY{o+ow}{in} \PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{\PYZbs{}}\PY{l+s+s2}{(}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{\PYZbs{}}\PY{l+s+s2}{[}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{\PYZob{}}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{p}{:}
+                        \PY{n}{sadfaces}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{e}\PY{o}{+}\PY{n}{n}\PY{o}{+}\PY{n}{s}\PY{p}{)}
+                        \PY{n}{sadfaces}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{e}\PY{o}{+}\PY{n}{s}\PY{p}{)}
+                    \PY{k}{for} \PY{n}{s} \PY{o+ow}{in} \PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{\PYZbs{}}\PY{l+s+s2}{|}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{\PYZbs{}}\PY{l+s+s2}{/}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+sa}{r}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+se}{\PYZbs{}\PYZbs{}}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{p}{:}
+                        \PY{n}{neutralfaces}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{e}\PY{o}{+}\PY{n}{n}\PY{o}{+}\PY{n}{s}\PY{p}{)}
+                        \PY{n}{neutralfaces}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{e}\PY{o}{+}\PY{n}{s}\PY{p}{)}
+                    \PY{c+c1}{\PYZsh{}reversed}
+                    \PY{k}{for} \PY{n}{s} \PY{o+ow}{in} \PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{\PYZbs{}}\PY{l+s+s2}{(}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{\PYZbs{}}\PY{l+s+s2}{[}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{\PYZob{}}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{p}{:}
+                        \PY{n}{smilefaces}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{s}\PY{o}{+}\PY{n}{n}\PY{o}{+}\PY{n}{e}\PY{p}{)}
+                        \PY{n}{smilefaces}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{s}\PY{o}{+}\PY{n}{e}\PY{p}{)}
+                    \PY{k}{for} \PY{n}{s} \PY{o+ow}{in} \PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{\PYZbs{}}\PY{l+s+s2}{)}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{\PYZbs{}}\PY{l+s+s2}{]}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{\PYZcb{}}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{p}{:}
+                        \PY{n}{sadfaces}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{s}\PY{o}{+}\PY{n}{n}\PY{o}{+}\PY{n}{e}\PY{p}{)}
+                        \PY{n}{sadfaces}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{s}\PY{o}{+}\PY{n}{e}\PY{p}{)}
+                    \PY{k}{for} \PY{n}{s} \PY{o+ow}{in} \PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{\PYZbs{}}\PY{l+s+s2}{|}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{\PYZbs{}}\PY{l+s+s2}{/}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+sa}{r}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+se}{\PYZbs{}\PYZbs{}}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{p}{:}
+                        \PY{n}{neutralfaces}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{s}\PY{o}{+}\PY{n}{n}\PY{o}{+}\PY{n}{e}\PY{p}{)}
+                        \PY{n}{neutralfaces}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{s}\PY{o}{+}\PY{n}{e}\PY{p}{)}
+        
+            \PY{n}{smilefaces} \PY{o}{=} \PY{n+nb}{list}\PY{p}{(}\PY{n+nb}{set}\PY{p}{(}\PY{n}{smilefaces}\PY{p}{)}\PY{p}{)}
+            \PY{n}{sadfaces} \PY{o}{=} \PY{n+nb}{list}\PY{p}{(}\PY{n+nb}{set}\PY{p}{(}\PY{n}{sadfaces}\PY{p}{)}\PY{p}{)}
+            \PY{n}{neutralfaces} \PY{o}{=} \PY{n+nb}{list}\PY{p}{(}\PY{n+nb}{set}\PY{p}{(}\PY{n}{neutralfaces}\PY{p}{)}\PY{p}{)}
+        
+            \PY{n}{t} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+            \PY{k}{for} \PY{n}{w} \PY{o+ow}{in} \PY{n}{text}\PY{o}{.}\PY{n}{split}\PY{p}{(}\PY{p}{)}\PY{p}{:}
+                \PY{k}{if} \PY{n}{w} \PY{o+ow}{in} \PY{n}{loves}\PY{p}{:}
+                    \PY{n}{t}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{\PYZlt{}love\PYZgt{}}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+                \PY{k}{elif} \PY{n}{w} \PY{o+ow}{in} \PY{n}{smilefaces}\PY{p}{:}
+                    \PY{n}{t}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{\PYZlt{}happy\PYZgt{}}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+                \PY{k}{elif} \PY{n}{w} \PY{o+ow}{in} \PY{n}{neutralfaces}\PY{p}{:}
+                    \PY{n}{t}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{\PYZlt{}neutral\PYZgt{}}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+                \PY{k}{elif} \PY{n}{w} \PY{o+ow}{in} \PY{n}{sadfaces}\PY{p}{:}
+                    \PY{n}{t}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{\PYZlt{}sad\PYZgt{}}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+                \PY{k}{else}\PY{p}{:}
+                    \PY{n}{t}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{w}\PY{p}{)}
+            \PY{n}{newText} \PY{o}{=} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{ }\PY{l+s+s2}{\PYZdq{}}\PY{o}{.}\PY{n}{join}\PY{p}{(}\PY{n}{t}\PY{p}{)}
+            \PY{k}{return} \PY{n}{newText}
+\end{Verbatim}
+
+
+    Emphaszie Punctuation
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}10}]:} \PY{k}{def} \PY{n+nf}{emphaszie\PYZus{}punctuation}\PY{p}{(}\PY{n}{text}\PY{p}{)}\PY{p}{:}
+             \PY{k}{for} \PY{n}{punctuation} \PY{o+ow}{in} \PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{!}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{?}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{.}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{:}
+                 \PY{n}{regex} \PY{o}{=} \PY{l+s+sa}{r}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{[}\PY{l+s+s1}{\PYZsq{}} \PY{o}{+} \PY{n}{punctuation} \PY{o}{+} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{]}\PY{l+s+s1}{\PYZsq{}} \PY{o}{+} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{+}\PY{l+s+s2}{\PYZdq{}}
+                 \PY{n}{text} \PY{o}{=} \PY{n}{re}\PY{o}{.}\PY{n}{sub}\PY{p}{(}\PY{n}{regex}\PY{p}{,} \PY{n}{punctuation} \PY{o}{+} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{ \PYZlt{}repeat\PYZgt{} }\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{text}\PY{p}{)}
+             \PY{k}{return} \PY{n}{text}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}11}]:} \PY{n}{emphaszie\PYZus{}punctuation}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{yesss ! rt \PYZlt{}user\PYZgt{} \PYZlt{}user\PYZgt{} thanks jordan , i love you}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}11}]:} 'yesss ! <repeat>  rt <user> <user> thanks jordan , i love you'
+\end{Verbatim}
+            
+    \# Emphasize positive and negative words
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}12}]:} \PY{c+c1}{\PYZsh{} Loading positive and negative words from dictionary}
+         \PY{n}{positive\PYZus{}word\PYZus{}library} \PY{o}{=} \PY{n+nb}{list}\PY{p}{(}\PY{n+nb}{set}\PY{p}{(}\PY{n+nb}{open}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{data/dictionary/positive\PYZhy{}words.txt}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{encoding} \PY{o}{=} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{ISO\PYZhy{}8859\PYZhy{}1}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}\PY{o}{.}\PY{n}{read}\PY{p}{(}\PY{p}{)}\PY{o}{.}\PY{n}{split}\PY{p}{(}\PY{p}{)}\PY{p}{)}\PY{p}{)}
+         \PY{n}{negative\PYZus{}word\PYZus{}library} \PY{o}{=} \PY{n+nb}{list}\PY{p}{(}\PY{n+nb}{set}\PY{p}{(}\PY{n+nb}{open}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{data/dictionary/negative\PYZhy{}words.txt}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{encoding} \PY{o}{=} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{ISO\PYZhy{}8859\PYZhy{}1}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}\PY{o}{.}\PY{n}{read}\PY{p}{(}\PY{p}{)}\PY{o}{.}\PY{n}{split}\PY{p}{(}\PY{p}{)}\PY{p}{)}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{n}{positive\PYZus{}word\PYZus{}library}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{n}{negative\PYZus{}word\PYZus{}library}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+['astutely', 'masterfully', 'exalted', 'enliven', 'competitive', 'personages', 'angel', 'luck', 'evaluative', 'thriving', 'fecilitous', 'dirt-cheap', 'roomier', 'awe', 'vivid', 'felicitous', 'glow', 'convenience', 'appreciates', 'foremost', 'comforting', 'overtaken', 'courtly', 'best-performing', 'reasonable', 'flawless', 'warmly', 'luxuriate', 'durable', 'mighty', 'wonderfully', 'supporting', 'risk-free', 'righteous', 'striving', 'marvels', 'covenant', 'progress', 'proven', 'adventurous', 'jaw-dropping', 'preeminent', 'beutifully', 'reaffirmation', 'congratulation', 'serene', 'rock-star', 'record-setting', 'intelligent', 'dependable', 'innovative', 'respect', 'richer', 'thoughtful', 'goood', 'hotcakes', 'graciously', 'stellar', 'breeze', 'friendly', 'smoothes', 'industrious', 'levity', 'headway', 'thrills', 'cherish', 'trouble-free', 'harmony', 'reverently', 'self-satisfaction', 'supports', 'dead-on', 'verifiable', 'survivor', 'stability', 'advocates', 'effusively', 'excallent', 'exuberance', 'easygoing', 'elite', 'important', 'mercy', 'illuminate', 'fascination', 'enough', 'shimmeringly', 'advocated', 'dazzled', 'permissible', 'snazzy', 'conciliate', 'sensible', 'talented', 'thoughtfully', 'respectfully', 'better-known', 'swift', 'extoll', 'romanticize', 'beautifully', 'problem-solver', 'interests', 'logical', 'brighter', 'infallible', 'restful', 'imaculate', 'piety', 'sharper', 'frugal', 'quicker', 'humorous', 'happiness', 'cure-all', 'soulful', 'merriness', 'correctly', 'saintliness', 'aspirations', 'altruistically', 'divinely', 'effectiveness', 'mature', 'spontaneous', 'tenaciously', 'magnanimous', 'joyously', 'rosy', 'coherent', 'benevolent', 'ecstatic', 'avidly', 'optimistic', 'affability', 'zest', 'entrancing', 'hale', 'ebullience', 'reverent', 'smart', 'adequate', 'well-being', 'eases', 'sharpest', 'appreciate', 'coolest', 'dreamland', 'energize', 'peaceable', 'futuristic', 'enlighten', 'compact', 'enchanting', 'lustrous', 'enterprising', 'ingenuously', 'low-priced', 'hardy', 'integral', 'invaluablely', 'holy', 'reclaim', 'smile', 'fervor', 'replaceable', 'assurance', 'upliftingly', 'enticingly', 'assurances', 'properly', 'generosity', 'clears', 'pardon', 'endorse', 'seamless', 'inspiration', 'available', 'smoothly', 'awesome', 'exhilarating', 'prudently', 'excites', 'reaffirm', 'undisputed', 'endorsement', 'lead', 'lavish', 'inspiring', 'gems', 'suavely', 'righteously', 'cleared', 'overtakes', 'outdo', 'flatter', 'err-free', 'recomend', 'grandeur', 'slick', 'heaven', 'outperformed', 'terrifically', 'sincerely', 'law-abiding', 'dumbfounded', 'upliftment', 'poignant', 'trustworthy', 'hard-working', 'classy', 'non-violence', 'virtuously', 'vibrant', 'compactly', 'enhancement', 'amazement', 'beneficially', 'feisty', 'remission', 'clean', 'unbeatable', 'cashbacks', 'effusion', 'pep', 'jovial', 'mesmerized', 'irreplaceable', 'transparent', 'favorited', 'infallibility', 'paradise', 'aver', 'rectifying', 'sturdier', 'enviousness', 'uplifting', 'soundness', 'champion', 'revival', 'reasoned', 'flawlessly', 'fertile', 'envious', 'insightfully', 'lifesaver', 'ambitious', 'hero', 'suffice', 'lover', 'dumbfounding', 'problem-free', 'scenic', 'eye-catching', 'instantly', 'advantageously', 'encouragingly', 'celebration', 'receptive', 'fervidly', 'empowerment', 'patiently', 'secure', 'rewardingly', 'well-connected', 'whooa', 'led', 'efficient', 'wisdom', 'sufficiently', 'woo', 'chivalrous', 'bliss', 'redeeming', 'smartly', 'handsomely', 'mesmerize', 'faithfulness', 'sensibly', 'self-sufficient', 'praise', 'solicitously', 'privileged', 'euphoric', 'thumbs-up', 'convient', 'empower', 'courage', 'impartiality', 'prowess', 'peacekeepers', 'adulatory', 'merrily', 'backbone', 'loving', 'razor-sharp', 'divine', 'astonish', 'enhances', 'invigorate', 'cleaner', 'idyllic', 'enjoyment', 'pleasurable', 'god-given', 'instructive', 'undamaged', 'well-bred', 'deft', 'favorite', 'virtuous', 'invaluable', 'freshest', 'noteworthy', 'smoothest', 'stellarly', 'reward', 'deference', 'defeated', 'influential', 'gracious', 'exceedingly', 'accurate', 'stunned', 'adoring', 'educated', 'delicate', 'warm', 'enticing', 'masterpieces', 'loved', 'toughest', 'wieldy', 'humane', 'supremacy', 'outperforming', 'brilliantly', 'cool', 'majesty', 'invigorating', 'preferring', 'sane', 'charming', 'gleefully', 'thrill', 'gallant', 'enthusiasm', 'raptureously', 'marvelously', 'impassioned', 'gratified', 'zenith', 'desirable', 'assuredly', 'magical', 'proficiently', 'sociable', 'enthral', 'wowing', 'amicability', 'silent', 'impresses', 'gusto', 'topnotch', 'audible', 'admiration', 'swankiest', 'amiability', 'righten', 'benevolence', 'admirable', 'luckier', 'cheery', 'credible', 'coherence', 'novelty', 'propitious', 'jubiliant', 'soothe', 'affirmative', 'cajole', 'tantalizing', 'playful', 'enviable', 'high-spirited', 'upgraded', 'dote', 'wonder', 'lyrical', 'keenly', 'tingle', 'expertly', 'kindness', 'fairness', 'fast-paced', 'raptureous', 'happily', 'works', 'delicacy', 'smartest', 'fantastically', 'loves', 'impressively', 'swankier', 'attraction', 'prospros', 'long-lasting', 'vibrantly', 'subsidize', 'cheaper', 'pleased', 'powerful', 'satisified', 'delight', 'strongest', 'foresight', 'truthfully', 'noble', 'merry', 'slammin', 'rapid', 'stylish', 'promising', 'heartfelt', 'intimate', 'effortlessly', 'goodly', 'guarantee', 'profoundly', 'excite', 'finest', 'goodwill', 'sweetly', 'bless', 'satisfies', 'ecstasy', 'dawn', 'humourous', 'posh', 'strong', 'contrasty', 'impressive', 'smarter', 'won', 'sublime', 'enhanced', 'nurturing', 'genius', 'perfect', 'enlightenment', 'peerless', 'recommended', 'meaningful', 'phenomenal', 'masters', 'yay', 'affinity', 'lucidly', 'softer', 'gold', 'pleases', 'idolize', 'subsidizing', 'fabulous', 'profuse', 'orderly', 'complemented', 'admirably', 'excellency', 'proactive', 'obsession', 'fearless', 'realizable', 'reassurance', 'spellbindingly', 'endearing', 'matchless', 'world-famous', 'grin', 'exalting', 'advantage', 'compassion', 'extraordinary', 'endorses', 'unforgettable', 'safely', 'cuteness', 'remarkable', 'sumptuously', 'effective', 'beckoned', 'smiling', 'pleasurably', 'heroize', 'remarkably', 'refresh', 'proficient', 'sensitive', 'peps', 'majestic', 'dazzling', 'leads', 'adulate', 'attentive', 'popular', 'positives', 'continuity', 'gratifies', 'elated', 'enthusiastic', 'trumpet', 'mind-blowing', 'super', 'appreciative', 'amity', 'overtook', 'quiet', 'energetic', 'adorer', 'boost', 'vouch', 'dignify', 'better', 'likable', 'fervid', 'enjoying', 'enrichment', 'skillful', 'distinctive', 'supurb', 'blockbuster', 'clear-cut', 'nice', 'halcyon', 'splendid', 'truthful', 'unquestionable', 'suitable', 'simpler', 'inviolable', 'ennoble', 'illustrious', 'miracles', 'stupendous', 'diversified', 'exhilaration', 'altruistic', 'well-intentioned', 'best', 'lower-priced', 'fine', 'capable', 'loyalty', 'apotheosis', 'classic', 'promises', 'reputable', 'poetic', 'charm', 'glitz', 'portable', 'gratification', 'deginified', 'regal', 'tantalizingly', 'well-known', 'assuring', 'marvelled', 'tempting', 'groundbreaking', 'thankful', 'daringly', 'agreeable', 'consistently', 'honorable', 'straightforward', 'ingeniously', 'exceptionally', 'delighted', 'nimble', 'cleanest', 'sagely', 'handy', 'successful', 'advocate', 'gorgeously', 'achievement', 'beckoning', 'fashionably', 'irresistible', 'trusty', 'revives', 'amicably', 'manageable', 'astounding', 'succeeds', 'temptingly', 'irresistibly', 'marvellous', 'sweeten', 'remunerate', 'unbiased', 'satisfied', 'well-managed', 'counter-attacks', 'ergonomical', 'inestimably', 'whoa', 'deserving', 'tender', 'precise', 'courageously', 'top-notch', 'gratifying', 'tempt', 'top', 'low-cost', 'optimism', 'facilitate', 'better-than-expected', 'adulation', 'ecstasies', 'eventful', 'intelligible', 'willingness', 'clear', 'exciting', 'stylized', 'plentiful', 'unequivocally', 'inviolate', 'sharp', 'delicious', 'first-class', 'grand', 'sweetness', 'heroic', 'chivalry', 'lionhearted', 'boom', 'outwit', 'triumphal', 'regally', 'awarded', 'distinction', 'fascinating', 'exuberant', 'spellbind', 'fulfillment', 'exonerate', 'dignified', 'promoter', 'master', 'articulate', 'well-backlit', 'devout', 'hotcake', 'charmingly', 'gentle', 'individualized', 'persevere', 'warmhearted', 'enrapture', 'bravo', 'immense', 'maturity', 'celebrate', 'comfortable', 'unfettered', 'accurately', 'prosper', 'wow', 'agilely', 'well-regarded', 'dependably', 'hottest', 'attractive', 'magnanimously', 'considerate', 'free', 'survival', 'sufficed', 'easiness', 'prominent', 'superbly', 'usable', 'benefactor', 'concise', 'glisten', 'outperforms', 'talent', 'complementary', 'rapturously', 'solid', 'fascinatingly', 'favorable', 'achievible', 'capably', 'pretty', 'exceled', 'commendable', 'optimal', 'well-balanced', 'honest', 'booming', 'acclamation', 'stronger', 'awesomely', 'indulgent', 'balanced', 'eloquently', 'diligent', 'congratulatory', 'magnificently', 'unreal', 'upheld', 'lovely', 'superior', 'steady', 'winner', 'beckons', 'gorgeous', 'sweet', 'favored', 'gush', 'productively', 'restructured', 'glitter', 'uncomplicated', 'righteousness', 'reconciliation', 'bonuses', 'purposeful', 'wellbeing', 'gratify', 'honoring', 'rapport', 'unbound', 'adventuresome', 'awed', 'glorious', 'twinkly', 'tough', 'bolster', 'trusting', 'accomplishments', 'superb', 'elegance', 'overtaking', 'clearer', 'godlike', 'perseverance', 'eyecatch', 'gladden', 'endear', 'convienient', 'efficacious', 'improve', 'securely', 'statuesque', 'wonders', 'swank', 'tranquil', 'dynamic', 'prodigiously', 'evenly', 'expansive', 'elan', 'affectionate', 'fancinating', 'benifits', 'reforms', 'faultless', 'incredibly', 'diligence', 'undaunted', 'thrilling', 'willingly', 'accessible', 'eloquence', 'favour', 'fine-looking', 'unabashed', 'unmatched', 'dominates', 'miraculously', 'commend', 'skillfully', 'fearlessly', 'undisputable', 'blameless', 'heartening', 'useful', 'dexterous', 'glistening', 'indulgence', 'ardor', 'patriotic', 'overture', 'entertains', 'adroitly', 'fun', 'feasibly', 'celebratory', 'passionate', 'brave', 'delightfully', 'exuberantly', 'fancier', 'peace', 'extol', 'easy-to-use', 'tougher', 'resourceful', 'outstanding', 'astonishment', 'charisma', 'contribution', 'endorsed', 'smiles', 'steadfast', 'eager', 'well', 'loveliness', 'flexible', 'fascinate', 'excellently', 'wise', 'bountiful', 'sturdy', 'eulogize', 'beneficial', 'intricate', 'quaint', 'avid', 'cleanly', 'romantic', 'foolproof', 'prodigy', 'high-quality', 'glowing', 'honor', 'conveniently', 'decisiveness', 'peach', 'prize', 'well-behaved', 'satisfactory', 'enjoy', 'accommodative', 'empathize', 'resplendent', 'breathtakingly', 'heroine', 'willing', 'accomplishment', 'wonderously', 'amazes', 'eye-catch', 'memorable', 'dashing', 'nifty', 'happier', 'unassailable', 'pluses', 'saver', 'principled', 'worthwhile', 'congratulations', 'surpass', 'gloriously', 'revelation', 'light-hearted', 'improving', 'trophy', 'intuitive', 'protection', 'triumphant', 'monumental', 'bargain', 'respectful', 'wowed', 'uplift', 'swanky', 'eagerness', 'revere', 'ecstatically', 'pain-free', 'sweetheart', 'understandable', 'palatial', 'wondrous', 'infallibly', 'commitment', 'brilliance', 'fervently', 'grace', 'ardent', 'spacious', 'elation', 'stylishly', 'encouraging', 'incredible', 'edify', 'idol', 'opulent', 'privilege', 'impartially', 'convenient', 'trendy', 'audibly', 'gain', 'afford', 'accolades', 'richly', 'feasible', 'staunchly', 'sumptuous', 'mesmerizingly', 'revolutionary', 'elegantly', 'solidarity', 'appreciated', 'ample', 'revive', 'success', 'polished', 'flashy', 'admire', 'lawfully', 'unparalleled', 'excellant', 'handier', 'monumentally', 'freedoms', 'loyal', 'mercifully', 'proving', 'compliment', 'keenness', 'flatteringly', 'gainful', 'intriguing', 'darling', 'excellent', 'auspicious', 'brightest', 'crisper', 'praising', 'engrossing', 'effectively', 'qualified', 'amusingly', 'commendably', 'stirringly', 'upgradeable', 'enchantingly', 'brilliant', 'abundant', 'helped', 'refunded', 'acclaim', 'hallowed', 'cooperative', 'fave', 'undisputably', 'first-rate', 'blithe', 'courageousness', 'compassionate', 'rightful', 'cushy', 'shiny', 'saint', 'well-wishers', 'famous', 'unselfish', 'amusing', 'credence', 'phenomenally', 'winnable', 'splendidly', 'endorsing', 'buoyant', 'mastery', 'enticed', 'cost-saving', 'examplar', 'honored', 'magnificence', 'amazing', 'zeal', 'finer', 'harmonious', 'veritable', 'calming', 'savior', 'honesty', 'ideal', 'rejuvenating', 'marvelousness', 'vigilant', 'faster', 'achievements', 'savings', 'kindliness', 'snappy', 'luminous', 'intimacy', 'openness', 'hot', 'fresher', 'kid-friendly', 'chic', 'succeeding', 'jubilant', 'acumen', 'brainy', 'faith', 'conscientious', 'kindly', 'traction', 'overjoyed', 'meritorious', 'harmonize', 'harmless', 'tickle', 'sagacity', 'staunch', 'courageous', 'pampers', 'poeticize', 'leverage', 'believeable', 'gladly', 'capability', 'immaculate', 'picturesque', 'pamperedness', 'legendary', 'benefits', 'recommendations', 'unabashedly', 'helpful', 'radiant', 'profusion', 'astound', 'gem', 'non-violent', 'worthiness', 'enchanted', 'effusiveness', 'exceed', 'astounded', 'neatest', 'beneficent', 'renown', 'valiant', 'magnificent', 'pure', 'agile', 'improvement', 'renewed', 'safe', 'plush', 'realistic', 'supurbly', 'prudence', 'brotherly', 'tremendously', 'revel', 'rejoicingly', 'gallantly', 'recovery', 'nicest', 'openly', 'dauntless', 'versatile', 'glowingly', 'peaceful', 'defeat', 'destiny', 'idealize', 'brighten', 'impartial', 'efficiently', 'cohesive', 'ebullient', 'cheerful', 'politeness', 'accessable', 'breakthrough', 'exceeded', 'stupendously', 'excellence', 'entertain', 'dextrous', 'hands-down', 'hospitable', 'entranced', 'delightfulness', 'compatible', 'spellbound', 'pleasure', 'mesmerizes', 'talents', 'nicely', 'prosperity', 'enthusiast', 'magic', 'unity', 'breakthroughs', 'improved', 'luxuriously', 'bright', 'valor', 'formidable', 'strikingly', 'togetherness', 'outshone', 'support', 'self-determination', 'jubilation', 'energy-efficient', 'panoramic', 'affably', 'oasis', 'dominated', 'enthusiastically', 'amiabily', 'adjustable', 'rightness', 'excel', 'hooray', 'imaginative', 'tenacious', 'wonderous', 'staunchness', 'spectacularly', 'pamperedly', 'luxury', 'flourishing', 'adroit', 'dead-cheap', 'glad', 'chaste', 'purify', 'reformed', 'responsibly', 'promised', 'bullish', 'eminence', 'polite', 'progressive', 'spirited', 'intrigue', 'fidelity', 'abundance', 'stainless', 'speedily', 'promptly', 'exultingly', 'painlessly', 'easiest', 'improves', 'believable', 'agreeably', 'glee', 'sparkling', 'astonishing', 'exemplary', 'fabulously', 'friendliness', 'whoooa', 'elate', 'consistent', 'god-send', 'paramount', 'gratifyingly', 'state-of-the-art', 'upscale', 'amaze', 'awards', 'examplary', 'effectual', 'graceful', 'salutary', 'defeating', 'beautifullly', 'joy', 'inpressed', 'relaxed', 'vigilance', 'exceeding', 'expeditiously', 'agreeableness', 'selective', 'gutsy', 'deservedly', 'gladness', 'boundless', 'nourishing', 'awsome', 'spectacular', 'advantages', 'elevate', 'succeed', 'glorify', 'ingenuity', 'easy', 'favor', 'ftw', 'reachable', 'lawful', 'lovably', 'dotingly', 'euphorically', 'famously', 'swiftness', 'simplest', 'earnestness', 'miraculous', 'inestimable', 'thrift', 'sustainable', 'satisfying', 'blissfully', 'elegant', 'fav', 'sophisticated', 'motivated', 'amenable', 'prosperous', 'jaw-droping', 'like', 'invincibility', 'ebulliently', 'successes', 'reassure', 'standout', 'unrestricted', 'astonished', 'momentous', 'low-price', 'rock-stars', 'flourish', 'cheapest', 'enrapt', 'succes', 'marvelous', 'pros', 'gentlest', 'congenial', 'worked', 'enraptured', 'fondness', 'comfort', 'supported', 'colorful', 'pleasing', 'engaging', 'adore', 'promise', 'merit', 'spotless', 'rockstar', 'amuse', 'generously', 'delectable', 'equitable', 'amply', 'convience', 'heartwarming', 'ultra-crisp', 'work', 'savvy', 'fast-growing', 'eyecatching', 'self-sufficiency', 'thrifty', 'gratefully', 'felicitate', 'trusted', 'passionately', 'revolutionize', 'simplify', 'excelent', 'cost-effective', 'illuminating', 'civility', 'lighter', 'respite', 'impeccably', 'mightily', 'heroically', 'hopeful', 'joyous', 'salute', 'fluent', 'prudent', 'handsome', 'ideally', 'danken', 'fastest-growing', 'abounds', 'accomplished', 'perfection', 'fastest', 'thinner', 'rockstars', 'thrilled', 'recover', 'excitedly', 'robust', 'invincible', 'affluence', 'top-quality', 'subsidized', 'visionary', 'perfectly', 'gaining', 'originality', 'fans', 'subsidizes', 'adored', 'lush', 'rapt', 'modern', 'pre-eminent', 'revolutionized', 'genuine', 'luckiness', 'graciousness', 'acclaimed', 'premier', 'distinguished', 'reasonably', 'stimulates', 'playfully', 'sustainability', 'autonomous', 'affordably', 'enchant', 'sincere', 'thrillingly', 'fairly', 'lucid', 'erudite', 'felicity', 'idolized', 'qualify', 'eagerly', 'affluent', 'happy', 'excitement', 'greatness', 'gainfully', 'electrify', 'applaud', 'lucrative', 'galore', 'defeats', 'exquisitely', 'interesting', 'providence', 'unlimited', 'humility', 'bloom', 'dazzle', 'diligently', 'firmer', 'navigable', 'rejoicing', 'appeal', 'reform', 'attune', 'skill', 'tops', 'laudable', 'comprehensive', 'right', 'amenity', 'rightly', 'stimulative', 'supportive', 'calm', 'enviably', 'angelic', 'keen', 'seasoned', 'eased', 'sensational', 'powerfully', 'lively', 'outstandingly', 'miraculousness', 'merriment', 'superiority', 'solace', 'fortitude', 'defender', 'love', 'warmer', 'afordable', 'pleasantly', 'merciful', 'greatest', 'relief', 'affirmation', 'wisely', 'heartily', 'intelligence', 'exhilaratingly', 'surmount', 'joyful', 'soothingly', 'achievable', 'large-capacity', 'fortune', 'winning', 'meticulous', 'first-in-class', 'romantically', 'flutter', 'amicable', 'adoringly', 'masterful', 'clarity', 'pleasant', 'entice', 'contentment', 'enjoyably', 'proud', 'feature-rich', 'refreshing', 'appreciatively', 'rich', 'prestigious', 'alluring', 'earnest', 'youthful', 'unwavering', 'luxurious', 'champ', 'attractively', 'glory', 'wholesome', 'excitingly', 'wins', 'sweeping', 'doubtless', 'modest', 'luxuriant', 'titillate', 'jubilate', 'wows', 'all-around', 'wholeheartedly', 'supremely', 'decency', 'unfazed', 'enthrall', 'cherished', 'humour', 'healthful', 'unaffected', 'striking', 'eloquent', 'best-selling', 'stimulating', 'beautiful', 'glimmering', 'liked', 'congratulate', 'solicitous', 'valiantly', 'zippy', 'assure', 'refund', 'user-replaceable', 'worth', 'retractable', 'crisp', 'fortuitous', 'ingenious', 'profound', 'spiritual', 'wonderful', 'detachable', 'irreproachable', 'abound', 'noiseless', 'reliably', 'generous', 'resolute', 'well-made', 'healthy', 'skilled', 'breathlessness', 'praiseworthy', 'titillating', 'encourage', 'inventive', 'entertaining', 'lavishly', 'multi-purpose', 'workable', 'uphold', 'shimmering', 'poise', 'pepped', 'liberate', 'sensation', 'trivially', 'positive', 'winners', 'toll-free', 'appealing', 'aspire', 'glamorous', 'soundly', 'gained', 'inspirational', 'thank', 'restored', 'great', 'well-mannered', 'civilize', 'exceptional', 'fanfare', 'resilient', 'exceeds', 'complement', 'commodious', 'sparkle', 'peppy', 'regard', 'correct', 'faithful', 'aspiration', 'festive', 'embolden', 'sensationally', 'fortunate', 'ingenuous', 'benefit', 'welcome', 'delightful', 'judicious', 'effortless', 'eminent', 'smooth', 'amazingly', 'compliant', 'flattering', 'refine', 'upbeat', 'hallmarks', 'lean', 'sleek', 'goodness', 'heros', 'adaptable', 'rectify', 'sprightly', 'liberty', 'sexy', 'invulnerable', 'personalized', 'nourishment', 'renowned', 'inexpensive', 'poised', 'tenderly', 'rapture', 'comfy', 'tranquility', 'trustworthiness', 'diplomatic', 'gaily', 'propitiously', 'trust', 'responsive', 'thumb-up', 'enjoyable', 'exellent', 'passion', 'astoundingly', 'flexibility', 'futurestic', 'neat', 'variety', 'soft', 'pride', 'innovation', 'insightful', 'fame', 'reputation', 'luckiest', 'everlasting', 'affectation', 'fashionable', 'accolade', 'reverence', 'fervent', 'convincingly', 'treasure', 'envy', 'rectification', 'confident', 'preferable', 'steadiness', 'viewable', 'gratitude', 'pamper', 'well-educated', 'restructure', 'spellbinding', 'upgradable', 'catchy', 'morality', 'witty', 'exaltingly', 'prefered', 'unencumbered', 'ardently', 'unequivocal', 'versatility', 'gumption', 'innocuous', 'shine', 'rightfully', 'precisely', 'integrated', 'splendor', 'triumphantly', 'impressed', 'well-informed', 'sensations', 'well-run', 'calmness', 'hail', 'saintly', 'laudably', 'dedicated', 'cohere', 'readable', 'entrust', 'plusses', 'rewarding', 'overtake', 'bonus', 'advantageous', 'ilu', 'harmoniously', 'fondly', 'affordable', 'justly', 'quieter', 'luster', 'tenacity', 'prestige', 'revitalize', 'dominate', 'streamlined', 'hardier', 'carefree', 'protective', 'inspire', 'amiable', 'approve', 'mesmerizing', 'kudos', 'fortuitously', 'prompt', 'unconditional', 'beckon', 'user-friendly', 'prefer', 'satisfy', 'marvel', 'humorously', 'respectable', 'agility', 'rejuvenate', 'excels', 'gooood', 'exemplar', 'heavenly', 'ready', 'helping', 'stimulate', 'cozy', 'decent', 'courteous', 'enjoyed', 'prodigious', 'stunning', 'restructuring', 'comely', 'accomodative', 'suffices', 'counter-attack', 'likes', 'admiringly', 'blissful', 'cherub', 'supporter', 'roomy', 'bonny', 'neatly', 'alluringly', 'liberation', 'unquestionably', 'cute', 'nicer', 'beauty', 'freed', 'useable', 'good', 'tolerable', 'outstrip', 'wealthy', 'sumptuousness', 'virtue', 'instrumental', 'supreme', 'exultation', 'protect', 'effusive', 'cooperatively', 'appropriate', 'excited', 'accomplish', 'cure', 'frolic', 'refinement', 'patient', 'astonishingly', 'revolutionizes', 'intriguingly', 'enthuse', 'guidance', 'windfall', 'dignity', 'complimentary', 'prominence', 'impeccable', 'successfully', 'daring', 'redeem', 'painless', 'laud', 'victory', 'readily', 'win', 'finely', 'impressiveness', 'complements', 'preferes', 'vivacious', 'knowledgeable', 'charismatic', 'exaltedly', 'substantive', 'godsend', 'straighten', 'admiring', 'gifted', 'fruitful', 'geekier', 'patience', 'evocative', 'gleeful', 'golden', 'time-honored', 'admirer', 'appreciable', 'captivate', 'leading', 'fantastic', 'handily', 'conciliatory', 'stable', 'smitten', 'issue-free', 'jolly', 'empathy', 'obtainable', 'productive', 'danke', 'fond', 'cheer', 'victorious', 'stunningly', 'illuminati', 'outperform', 'illumine', 'gaiety', 'fiery', 'brand-new', 'enhance', 'joyfully', 'ecenomical', 'resourcefulness', 'tantalize', 'awestruck', 'suave', 'well-established', 'reconcile', 'awesomeness', 'euphoria', 'fair', 'affable', 'geeky', 'convincing', 'brainiest', 'proves', 'hilarious', 'clever', 'ambitiously', 'thrive', 'easier', 'cornerstone', 'worthy', 'humor', 'constructive', 'ameliorate', 'priceless', 'approval', 'significant', 'lucky', 'relish', 'steadiest', 'exhilarate', 'rapturous', 'exaltation', 'freedom', 'amazed', 'easing', 'authoritative', 'enthralled', 'resounding', 'famed', 'indebted', 'sporty', 'beloved', 'beneficiary', 'notably', 'brilliances', 'fancy', 'exquisite', 'simplifies', 'best-known', 'miracle', 'peacefully', 'dummy-proof', 'gracefully', 'confidence', 'reliable', 'prolific', 'ease', 'captivating', 'low-risk', 'award', 'immaculately', 'desiring', 'resound', 'enjoys', 'clearly', 'outshine', 'jollify', 'recommend', 'nobly', 'stately', 'maturely', 'ethical', 'richness', 'breathtaking', 'earnestly', 'precious', 'elatedly', 'simplified', 'surreal', 'hug', 'fortunately', 'tidy', 'glimmer', 'masterpiece', 'pinnacle', 'punctual', 'truthfulness', 'enviously', 'encouragement', 'adaptive', 'ovation', 'well-rounded', 'exalt', 'fragrant', 'grateful', 'consummate', 'gains', 'stabilize', 'well-positioned', 'patriot', 'worth-while', 'radiance', 'pleasingly', 'trump', 'reforming', 'terrific', 'excitedness', 'trustingly', 'genial', 'satisfactorily', 'positively', 'prettily', 'improvements', 'marveled', 'guiltless', 'hallmark', 'authentic', 'titillatingly', 'succeeded', 'homage', 'refreshed', 'humble', 'bravery', 'serenity', 'outsmart', 'brisk', 'valuable', 'prefers', 'pepping', 'rejoice', 'triumph', 'creative', 'cashback', 'steadfastness', 'exult', 'warmth', 'refined', 'rejuvenated', 'excelled', 'lovable', 'dexterously', 'smilingly', 'steadfastly', 'hearten', 'faithfully', 'remedy', 'cleverly', 'exultant', 'relent', 'sincerity', 'venerate', 'enrich', 'celebrated', 'timely', 'maneuverable', 'beautify', 'liking', 'recommendation', 'meticulously', 'sufficient', 'vouchsafe', 'self-respect', 'outdone', 'modesty', 'heal', 'blossom', 'rational', 'obsessions', 'fast', 'redemption', 'smoother', 'nourish', 'charitable', 'simplifying', 'jubilantly', 'unrivaled', 'comfortably', 'advanced', 'beauteous', 'economical', 'extraordinarily', 'cleanliness', 'desirous', 'supple', 'speedy', 'impress', 'feat', 'adorable', 'fresh', 'well-received', 'blessing', 'pampered', 'decisive', 'energy-saving', 'thoughtfulness', 'a+', 'affirm', 'preferably', 'affection', 'renaissance', 'proper']
+['damnably', 'exclusion', 'lengthy', 'burdensomely', 'calumniation', 'ignominy', 'bothers', 'naively', 'unconvincing', 'vindictively', 'shrill', 'flabbergasted', 'insidiously', 'junk', 'damnable', 'lapsed', 'shamelessly', 'despised', 'nastily', 'rampant', 'regressive', 'mortify', 'despot', 'timid', 'wrip', 'underestimate', 'stew', 'devastated', 'spiritless', 'futility', 'slander', 'flakey', 'insufficient', 'abrupt', 'erroneously', 'inconsistence', 'interfere', 'misunderstandings', 'trash', 'undependable', 'infidels', 'noisy', 'annoying', 'expel', 'decrepit', 'miscreant', 'mispronounces', 'overkill', 'amputate', 'idiotically', 'atrocity', 'worsening', 'refutation', 'crack', 'fooled', 'impropriety', 'ill-designed', 'dusty', 'inconveniently', 'irrecoverably', 'irritations', 'laconic', 'blister', 'stringently', 'suspiciously', 'randomly', 'disgusting', 'damage', 'anxieties', 'depressingly', 'mediocrity', 'tragedy', 'bothersome', 'conspicuously', 'contentious', 'deploring', 'dislike', 'intolerable', 'musty', 'anger', 'anarchist', 'loser', 'rape', 'struggles', 'depravedly', 'underpaid', 'hysterical', 'mishap', 'nightmarishly', 'ghetto', 'insolent', 'insubordinate', 'reject', 'sarcastic', 'disrespectfully', 'drastic', 'commonplace', 'execrate', 'cocky', 'explosive', 'loathsomely', 'mangles', 'savagery', 'judders', 'overwhelmed', 'dope', 'bafflement', 'aghast', 'insanely', 'squeals', 'incorrigible', 'worrisome', 'fabricate', 'incoherent', 'terror', 'trivial', 'snobish', 'impulsive', 'sleazy', 'wildly', 'mortified', 'scolded', 'unruly', 'harridan', 'peevishly', 'uproot', 'drunkard', 'gibe', 'ignominiously', 'disrespecting', 'inglorious', 'disagreeable', 'cliche', 'craziness', 'lanky', 'foolishly', 'presumptuously', 'bungle', 'unsettling', 'unspecified', 'peril', 'ill-fated', 'flabbergast', 'shocked', 'insinuate', 'tumble', 'betray', 'inconsistent', 'afflictive', 'pandemonium', 'starvation', 'compulsive', 'aggrieved', 'crooks', 'disconcert', 'exasperating', 'creepy', 'casualty', 'foolish', 'scoffingly', 'guiltily', 'unavailable', 'inelegance', 'fastidiously', 'disreputable', 'stench', 'regreted', 'humming', 'feeblely', 'unnoticed', 'depress', 'drowning', 'inconsequently', 'indolent', 'abysmally', 'sneeringly', 'erratically', 'condemnable', 'invidiously', 'worsen', 'grumble', 'die-hard', 'torturous', 'dents', 'inconstant', 'lonely', 'fallaciousness', 'inexperience', 'non-confidence', 'unfriendly', 'remorsefully', 'snag', 'immorality', 'indecently', 'interference', 'derogatory', 'negativity', 'dripping', 'inability', 'inessential', 'lawless', 'faint', 'foe', 'passive', 'scum', 'anti-occupation', 'cheated', 'dissenter', 'distrustful', 'indoctrinate', 'sharply', 'abomination', 'bull----', 'antagonistic', 'bland', 'fleeing', 'rash', 'insults', 'cannibal', 'grisly', 'stumped', 'ail', 'frightfully', 'tout', 'damn', 'calamitously', 'fright', 'ambivalence', 'losers', 'guile', 'perfunctory', 'terribleness', 'incessantly', 'retards', 'skinny', 'anti-white', 'dismay', 'concession', 'exaggerate', 'excuses', 'hooligan', 'detraction', 'geezer', 'writhe', 'meltdown', 'overlook', 'pander', 'oddly', 'pompous', 'racists', 'excessively', 'heartbreakingly', 'ranted', 'contemptible', 'scratched', 'stuttered', 'backwardness', 'contradiction', 'monotonous', 'disliking', 'lemon', 'impurity', 'relentless', 'egomania', 'hoodium', 'inflammation', 'odder', 'doomsday', 'abyss', 'anti-', 'overwhelming', 'dispensable', 'acrimonious', 'sneering', 'acerbic', 'outraged', 'atrophy', 'bullshyt', 'inconsolable', 'apocalypse', 'failing', 'arduous', 'traitor', 'distraughtly', 'lorn', 'delusion', 'uneasy', 'treachery', 'loneliness', 'restricted', 'salacious', 'crime', 'precariously', 'regret', 'painfully', 'indignant', 'invidiousness', 'dauntingly', 'aversion', 'fiendish', 'hysterics', 'mindless', 'messed', 'deign', 'smelling', 'murky', 'victimize', 'unlucky', 'ruthlessness', 'ferocity', 'surrender', 'unfortunate', 'dirt', 'shortage', 'maniac', 'scarcely', 'mushy', 'jagged', 'unusually', 'trashed', 'infirm', 'deplorably', 'impeach', 'superficial', 'grim', 'powerless', 'groundless', 'oversimplified', 'scream', 'uncomfy', 'polemize', 'heckle', 'cunts', 'scarce', 'villainously', 'fried', 'melodramatically', 'contemptuous', 'abolish', 'displeased', 'crashing', 'misguide', 'fracture', 'damning', 'confusion', 'anti-us', 'spurn', 'desert', 'idiocies', 'untenable', 'vomit', 'abominate', 'jealousy', 'dissolute', 'anemic', 'falsely', 'wild', 'splitting', 'unprofitable', 'bastard', 'ugh', 'hostilities', 'travesties', 'exterminate', 'impractical', 'dismayed', 'indignation', 'adulteration', 'prejudices', 'inequitable', 'apologist', 'appal', 'imperfect', 'appalled', 'engulf', 'impinge', 'pandering', 'severe', 'unorthodoxy', 'scathing', 'difficult', 'autocratic', 'dust', 'hatefulness', 'bother', 'dubious', 'pretence', 'revengefully', 'distaste', 'spoonfed', 'wrinkle', 'villify', 'shortsighted', 'rhetorical', 'cruelness', 'madman', 'uprising', 'lech', 'obscenity', 'accidental', 'wanton', 'contempt', 'bane', 'disappointingly', 'notorious', 'dissatisfactory', 'disturbed', 'acridly', 'blasted', 'dunce', 'head-aches', 'brutality', 'embroil', 'cracked', 'unwatchable', 'avaricious', 'lies', 'criticisms', 'intolerance', 'derision', 'outrages', 'anomaly', 'unfamiliar', 'starkly', 'crude', 'leakages', 'spewed', 'spoon-feed', 'trick', 'dehumanization', 'crashes', 'bull****', 'turmoil', 'obtrusive', 'brashly', 'gaff', 'unproved', 'bombard', 'obnoxious', 'grumpy', 'manipulative', 'heartless', 'doomed', 'knife', 'manic', 'vibrated', 'devilishly', 'stammer', 'wicked', 'tangles', 'detracting', 'bruised', 'limp', 'repression', 'franticly', 'confined', 'insult', 'rust', 'maddeningly', 'spews', 'punishable', 'dumps', 'dented', 'incapably', 'spitefulness', 'crumples', 'infuriatingly', 'ambush', 'inefficiency', 'denunciations', 'agonize', 'inexcusably', 'kills', 'slothful', 'escapade', 'anxiously', 'devilment', 'objection', 'retaliate', 'retaliatory', 'thwart', 'intractable', 'despotic', 'desperately', 'paranoid', 'mockery', 'upsettingly', 'overzelous', 'contaminated', 'revolt', 'debilitate', 'sly', 'pertinaciously', 'belligerence', 'bowdlerize', 'impolitely', 'indiscriminately', 'desperate', 'condescendingly', 'inflated', 'weep', 'nastiness', 'authoritarian', 'slowww', 'hopelessly', 'insouciance', 'preposterously', 'languish', 'unhelpful', 'obnoxiously', 'tainted', 'annoyances', 'displace', 'traumatized', 'incompatible', 'snub', 'lacked', 'retard', 'stumbled', 'excessive', 'radical', 'deprived', 'fuzzy', 'confront', 'unnervingly', 'dungeons', 'sidetracked', 'disgruntle', 'suppression', 'hypocrisy', 'motionless', 'chatter', 'goon', 'virulence', 'confessions', 'enviousness', 'untimely', 'jutter', 'bestial', 'cunt', 'offence', 'disoobedient', 'dishonestly', 'bug', 'inappropriate', 'succumb', 'despise', 'smell', 'envious', 'misconceptions', 'improbability', 'atrocities', 'disbelief', 'frantic', 'kook', 'falter', 'feint', 'negative', 'phobic', 'rattled', 'snappishly', 'unjustified', 'waning', 'cheating', 'deficient', 'downside', 'self-interest', 'slaves', 'unyielding', 'overreach', 'pales', 'ruthlessly', 'conspiratorial', 'perturbed', 'concen', 'perversely', 'stubborn', 'disparaging', 'extremist', 'latency', 'furious', 'concessions', 'rejected', 'undocumented', 'backbite', 'despondently', 'rankle', 'throbs', 'thicker', 'deadlock', 'blundering', 'mismanage', 'faltered', 'delayed', 'dropout', 'oppressive', 'scarcity', 'scrambling', 'disconcerted', 'villian', 'horde', 'ironic', 'knock', 'miscalculate', 'zapped', 'muddy', 'beleaguer', 'irrationalities', 'unimportant', 'rebuff', 'horrendously', 'uproar', 'disturbingly', 'pariah', 'grind', 'impersonal', 'deterrent', 'betrays', 'tortures', 'harassment', 'angriness', 'bash', 'calumnious', 'expulse', 'inordinately', 'pickets', 'qualm', 'threat', 'disadvantage', 'wrinkled', 'fears', 'crafty', 'frail', 'apprehension', 'slap', 'sagged', 'nightmarish', 'degeneration', 'disparagingly', 'undissolved', 'wobbled', 'peeve', 'bearish', 'stupidest', 'ruined', 'dismissive', 'avariciously', 'scratches', 'explode', 'inconsequential', 'inadequate', 'trauma', 'averse', 'involuntarily', 'objectionable', 'bigotry', 'indignity', 'bothered', 'unreliability', 'importunate', 'lurk', 'notoriety', 'ordeal', 'alarmingly', 'relentlessness', 'obtuse', 'coward', 'insincerely', 'unsavory', 'annoyingly', 'vulnerable', 'wastefulness', 'absurdness', 'acerbate', 'failed', 'inconsistencies', 'tyrant', 'cloudy', 'domineer', 'darkness', 'enflame', 'vagueness', 'atrocious', 'errors', 'impede', 'overwhelm', 'anxious', 'dissatisfied', 'deceitfully', 'bungling', 'condemn', 'incoherence', 'indistinguishable', 'downfallen', 'irked', 'ill-mannered', 'downhill', 'underlings', 'inhuman', 'turbulent', 'desititute', 'squeal', 'insupportably', 'scorching', 'puny', 'unimaginable', 'skeptically', 'regrettably', 'graft', 'inequities', 'blemish', 'prick', 'bleeding', 'incongruous', 'dismalness', 'raving', 'incorrectly', 'grotesque', 'discomfititure', 'wack', 'horrify', 'corrosion', 'fatcat', 'malevolently', 'tawdry', 'scowl', 'unbearable', 'useless', 'unrelentingly', 'subversion', 'unbelievably', 'ailing', 'altercation', 'disconcertingly', 'dismally', 'mislead', 'naïve', 'apprehensive', 'provocation', 'smoke', 'indigent', 'insufferably', 'corruptted', 'sullen', 'unscrupulously', 'shortsightedness', 'upbraid', 'contaminating', 'dirtbags', 'scrap', 'ironically', 'disdain', 'militancy', 'fatuity', 'frightening', 'divisive', 'ill-used', 'hawkish', 'denigrate', 'panicky', 'sick', 'disinterest', 'unconvincingly', 'womanizer', 'harms', 'vomited', 'bore', 'lackluster', 'pale', 'anti-semites', 'indignantly', 'strange', 'unintelligible', 'maliciously', 'shatter', 'disillusioned', 'hard', 'detract', 'diss', 'infringement', 'outmoded', 'renunciation', 'unnatural', 'tin-y', 'bad', 'asinine', 'nag', 'negligent', 'cramping', 'jittery', 'repugn', 'buckle', 'crushed', 'foulness', 'unsettle', 'fatally', 'overdue', 'hellion', 'nervously', 'collusion', 'break-up', 'hate', 'hegemonism', 'exploitation', 'tediously', 'assassin', 'affliction', 'ultimatum', 'distains', 'high-priced', 'grainy', 'intefere', 'filth', 'rhetoric', 'toughness', 'unattractive', 'upset', 'paltry', 'spookier', 'insolently', 'slogging', 'wrangle', 'confusing', 'slowly', 'audacity', 'dense', 'demise', 'disservice', 'reluctantly', 'retarded', 'dissonant', 'clunky', 'collapse', 'disconsolately', 'scant', 'destroy', 'ambiguity', 'offensive', 'devious', 'barren', 'bondage', 'harrow', 'interruptions', 'nepotism', 'paradoxical', 'violate', 'asininely', 'calumny', 'pleas', 'repulsed', 'sneaky', 'heartbreaker', 'displaced', 'decayed', 'tease', 'prisoner', 'ignominious', 'inhibit', 'tension', 'touts', 'disquiet', 'humiliate', 'pan', 'prohibit', 'funnily', 'inundated', 'nightmare', 'overstates', 'testily', 'tauntingly', 'uproariously', 'disaffirm', 'static', 'loveless', 'unsettlingly', 'stubbornness', 'radicals', 'sedentary', 'spurious', 'quandary', 'disabled', 'shamelessness', 'asinininity', 'flounder', 'transgress', 'vengeance', 'insufferable', 'greasy', 'confrontational', 'liars', 'tramp', '2-faced', 'cave', 'confounded', 'shortchange', 'brazen', 'longing', 'enrage', 'precarious', 'peeled', 'shameless', 'quibbles', 'senselessly', 'gutter', 'suffers', 'hypocrite', 'intermittent', 'pervasive', 'disrupt', 'hustler', 'tamper', 'scars', 'skittishly', 'unkind', 'passe', 'feeble', 'imprisonment', 'sufferer', 'resigned', 'indecision', 'misinformed', 'alienate', 'inimical', 'noise', 'scourge', 'conspire', 'indifference', 'laid-off', 'renounce', 'shaky', 'cowardly', 'sack', 'outsider', 'melodramatic', 'spendy', 'incomplete', 'bewitch', 'crowdedness', 'grouchy', 'disoriented', 'sloow', 'nefarious', 'douchebags', 'rough', 'debase', 'diffidence', 'antagonize', 'disturbing', 'cannibalize', 'haggard', 'petrified', 'unfaithfully', 'harassed', 'tiresome', 'bumps', 'crook', 'baseless', 'drop-out', 'intoxicate', 'hated', 'emaciated', 'over-valuation', 'ungovernable', 'complain', 'murder', 'uncreative', 'woe', 'lags', 'interferes', 'corrupt', 'farce', 'swelled', 'tense', 'pokey', 'disgruntled', 'noisier', 'uncompetitive', 'oversimplify', 'hatred', 'imposers', 'fucking', 'warlike', 'prate', 'tormented', 'obstinate', 'isolate', 'doubts', 'scolding', 'zap', 'cartoonish', 'difficulty', 'cataclysmal', 'stress', 'flaunt', 'orphan', 'patronize', 'injury', 'showdown', 'squirm', 'deaf', 'unorthodox', 'decay', 'subjection', 'unjustifiable', 'wasteful', 'antagonism', 'rail', 'distressing', 'paranoia', 'debacle', 'ill-tempered', 'lose', 'treason', 'deprave', 'violator', 'transgression', 'irrecoverablenesses', 'dissatisfy', 'hedge', 'exile', 'gibberish', 'hoodwink', 'awkward', 'fascist', 'nauseate', 'hubris', 'instigator', 'sickly', 'broken-hearted', 'dizzingly', 'gasp', 'madden', 'spooky', 'cramped', 'back-woods', 'drones', 'dishearteningly', 'shabby', 'agony', 'challenging', 'blinding', 'sloooow', 'afraid', 'imprudent', 'disapproving', 'disregard', 'inhospitable', 'deplete', 'vicious', 'marginal', 'haphazard', 'repulsive', 'irks', 'mortification', 'breaking', 'inequitably', 'tattered', 'break', 'blab', 'ill-treatment', 'indiscreetly', 'sucks', 'intense', 'repulsing', 'gimmicking', 'defiance', 'worthlessly', 'breach', 'irksomeness', 'lurch', 'derisiveness', 'overdo', 'profane', 'slog', 'contention', 'overpower', 'grumpish', 'ominously', 'attacks', 'gracelessly', 'distastefully', 'despair', 'invalidate', 'archaic', 'haze', 'clouding', 'reticent', 'embarrassing', 'war-like', 'smudges', 'fanatic', 'slooow', 'lack', 'rumbling', 'ugliest', 'selfishly', 'injustices', 'destains', 'ill-usage', 'implicate', 'irrelevance', 'harm', 'inteferes', 'jeers', 'flee', 'risky', 'thirst', 'prideful', 'thoughtlessly', 'rife', 'prison', 'ambiguous', 'emergency', 'uncivilized', 'viper', 'invalidity', 'disadvantageous', 'hollow', 'lethargy', 'denounce', 'strangest', 'irritating', 'dropouts', 'drags', 'impair', 'kaput', 'stymied', 'jeopardy', 'straggler', 'flirty', 'unlawfully', 'irragularity', 'sh*t', 'menial', 'predatory', 'stiffness', 'bothering', 'wariness', 'second-class', 'silly', 'squeak', 'combative', 'hapless', 'ill-favored', 'swipe', 'time-consuming', 'seriousness', 'bemoan', 'stupidity', 'shimmy', 'frazzled', 'allegation', 'rogue', 'bitterness', 'jerk', 'fugitive', 'sinister', 'frightful', 'tyranny', 'annihilate', 'spank', 'stagnant', 'shock', 'disappointment', 'mashed', 'poky', 'insociable', 'provoke', 'shun', 'languorous', 'infected', 'bewail', 'hates', 'ill-treated', 'trample', 'lawbreaker', 'misfit', 'troubles', 'losing', 'falling', 'dump', 'conflicted', 'unbelievable', 'irrationally', 'grievance', 'wimpy', 'hestitant', 'ached', 'pretentious', 'itch', 'degrading', 'discrimination', 'irksome', 'irredeemable', 'misconception', 'oppositions', 'recoil', 'taint', 'anti-israeli', 'cheerless', 'breakdown', 'baffled', 'exhorbitant', 'intolerablely', 'discourteously', 'burned', 'lethal', 'irrecoverable', 'gripes', 'tragic', 'instigate', 'frenzied', 'bent', 'unaccustomed', 'unnerve', 'hypocritical', 'incomparable', 'finicky', 'mobster', 'sober', 'misbegotten', 'picky', 'exacerbate', 'imprecate', 'fumble', 'damned', 'irately', 'snobby', 'gossip', 'nefariously', 'belated', 'erodes', 'pricey', 'ripoff', 'impossiblity', 'last-ditch', 'haywire', 'vehemently', 'eyesore', 'grievous', 'encroach', 'loner', 'uncaring', 'capriciousness', 'disapointment', 'liable', 'dimmer', 'complaining', 'pigs', 'melancholy', 'setback', 'sorrow', 'sorrowfully', 'cash-strapped', 'syndrome', 'underpowered', 'mangled', 'insensible', 'imposing', 'chide', 'deride', 'mordant', 'hideousness', 'mortifying', 'throbbed', 'checkered', 'weaker', 'conspirator', 'intransigent', 'dissed', 'retract', 'illogic', 'conflicting', 'indiscriminate', 'crazily', 'bigotries', 'creeps', 'sob', 'irreplacible', 'discord', 'drought', 'vex', 'beg', 'contradict', 'gloomy', 'perverted', 'unusual', 'disillusions', 'unsatisfactory', 'mania', 'daunt', 'aground', 'flake', 'impose', 'mindlessly', 'dire', 'frustrated', 'miff', 'breakup', 'austere', 'barbarically', 'swamped', 'violently', 'downhearted', 'cheapen', 'partisans', 'superfluous', 'object', 'cravenly', 'imprecision', 'desolately', 'shrug', 'impudently', 'malady', 'slogged', 'infamous', 'tortured', 'clumsy', 'slowed', 'over-balanced', 'mishandle', 'garbage', 'penalty', 'absurdity', 'excruciating', 'hardship', 'smear', 'smuttiest', 'ineloquently', 'soreness', 'corrosions', 'corrupting', 'short-lived', 'hairloss', 'substandard', 'spite', 'hardships', 'prik', 'emasculate', 'detracts', 'growl', 'disappointed', 'infringe', 'stigmatize', 'incendiary', 'impure', 'banish', 'stressfully', 'sore', 'inhospitality', 'insatiable', 'recourses', 'acerbically', 'smelled', 'unprove', 'hangs', 'inferiority', 'unusable', 'dick', 'doom', 'weak', 'clamorous', 'upsets', 'leer', 'intrusive', 'fevers', 'impolite', 'pimple', 'cataclysm', 'illegitimate', 'bleak', 'divergent', 'broken', 'askance', 'obscurity', 'deject', 'autocrat', 'letch', 'distort', 'ax', 'disgraced', 'douchbag', 'suspicions', 'oblique', 'odd', 'procrastination', 'leakage', 'hating', 'poorer', 'rancor', 'avalanche', 'frustrations', 'grumpily', 'complains', 'rupture', 'bogus', 'wasting', 'notoriously', 'hard-line', 'disintegration', 'flaw', 'liability', 'sinking', 'grieving', 'childish', 'illness', 'impetuously', 'delaying', 'raging', 'swagger', 'womanizing', 'contrived', 'wallow', 'denunciate', 'haters', 'bleakness', 'fibber', 'so-cal', 'coupists', 'fusty', 'arbitrary', 'preoccupy', 'bashed', 'moody', 'unfinished', 'reprehensibly', 'dismayingly', 'infiltrators', 'sham', 'unpleasant', 'backwood', 'untrue', 'enfeeble', 'disgracefully', 'plague', 'tepid', 'reprovingly', 'doggedly', 'provocative', 'falsify', 'disappointing', 'slowest', 'debauchery', 'demean', 'streaky', 'woebegone', 'cons', 'worried', 'infidel', 'conflict', 'set-up', 'boiling', 'savages', 'hallucinate', 'queer', 'detestably', 'fruitless', 'drag', 'unreachable', 'untested', 'tanks', 'fool', 'smouldering', 'breaks', 'despoiler', 'slow', 'die', 'accost', 'occlude', 'unsafe', 'whores', 'tangle', 'hack', 'get-rich', 'awfully', 'argumentative', 'puppet', 'acrimoniously', 'bulkiness', 'perfidious', 'rantingly', 'unimaginably', 'unsound', 'tumbled', 'prattle', 'defamatory', 'disvalue', 'glare', 'fatalistically', 'erode', 'wrestle', 'undignified', 'rumours', 'stereotypical', 'undermined', 'critic', 'disaster', 'picketed', 'risk', 'uncouth', 'lechery', 'accusation', 'ridicule', 'deteriorate', 'dissembler', 'self-coup', 'weaknesses', 'dissatisfying', 'skeptic', 'overdone', 'heckled', 'disorganized', 'clog', 'disarm', 'nemesis', 'perish', 'dissatisfies', 'slowwww', 'villianously', 'vileness', 'undercutting', 'uninformed', 'contagious', 'aborts', 'forbidding', 'alienated', 'handicapped', 'molest', 'hypocricy', 'servitude', 'overbalanced', 'warily', 'gangster', 'mire', 'implausible', 'nitpick', 'squabble', 'unfairly', 'utterly', 'evasive', 'erosion', 'disappoints', 'repugnance', 'fractious', 'brutally', 'bugs', 'cancerous', 'flaws', 'gainsayer', 'mistrust', 'scar', 'sluggish', 'unfaithful', 'disheartening', 'cackle', 'inflexible', 'sunken', 'glum', 'propagandize', 'finagle', 'enslave', 'miserableness', 'dirty', 'less-developed', 'vomits', 'frustratingly', 'disrespect', 'outrageousness', 'retreat', 'dissolution', 'haunting', 'impoverish', 'catastrophe', 'disapprove', 'choppy', 'tenuous', 'proprietary', 'abscond', 'unknown', 'crap', 'bumpping', 'carnage', 'tricky', 'convoluted', 'protests', 'crueler', 'spiteful', 'calamity', 'wrought', 'bleakly', 'banishment', 'busts', 'crippled', 'defect', 'alienation', 'bellicose', 'heresy', 'importune', 'decadence', 'messes', 'sceptical', 'unintelligile', 'vengefully', 'aches', 'idiotic', 'irrepressible', 'shrivel', 'imperious', 'sanctimonious', 'slower', 'unreadable', 'deficiency', 'mawkishness', 'flickers', 'harsh', 'goof', 'injustice', 'huckster', 'occluding', 'hassles', 'inefficiently', 'controversy', 'hurts', 'severity', 'fierce', 'ploy', 'frets', 'admonish', 'chasten', 'bravado', 'bugging', 'sadly', 'overstated', 'pittance', 'demon', 'outrageously', 'interrupt', 'daunting', 'fictitious', 'shortcomings', 'startlingly', 'displeasure', 'ineffectively', 'dissappointing', 'unsustainable', 'erase', 'incongruously', 'haughtily', 'brusque', 'interruption', 'irredeemably', 'debatable', 'insular', 'occluded', 'stricken', 'top-heavy', 'exagerated', 'virulently', 'degradingly', 'admonishment', 'impermissible', 'raked', 'cheesy', 'sporadic', 'ineffective', 'shimmer', 'awkwardness', 'disproportionate', 'demeaning', 'downer', 'imperfection', 'implacable', 'impugn', 'little-known', 'macabre', 'overrated', 'cheater', 'shady', 'smoulder', 'dissent', 'unlikely', 'insensitively', 'omit', 'indulge', 'propaganda', 'genocide', 'chatterbox', 'lied', 'faults', 'falls', 'accuses', 'byzantine', 'brittle', 'covetous', 'plot', 'superficiality', 'undermines', 'blurry', 'suffer', 'fallout', 'combust', 'farcical-yet-provocative', 'lecher', 'recalcitrant', 'regress', 'negate', 'beggar', 'incompatability', 'exagerates', 'straggle', 'fidget', 'hell', 'ill-sorted', 'vibrates', 'disinterested', 'truant', 'blotchy', 'neurotic', 'hectic', 'fallacious', 'depraved', 'choke', 'mercilessly', 'punch', 'knotted', 'mischievous', 'fickle', 'absence', 'maladjusted', 'reprehensive', 'sicken', 'radically', 'ingratitude', 'mourner', 'discrepant', 'pervert', 'lovelorn', 'morbidly', 'throbbing', 'burdensome', 'disinclined', 'heckles', 'bias', 'impatiently', 'quarrelsome', 'rumors', 'revoke', 'wreck', 'molestation', 'fustigate', 'insensitive', 'absurdly', 'distorted', 'dragged', 'joke', 'killing', 'hazy', 'fearsome', 'strife', 'encroachment', 'whiny', 'capsize', 'wrinkles', 'flimflam', 'fail', 'repudiate', 'marginally', 'panic', 'commotion', 'mirage', 'diametrically', 'refuse', 'dangerousness', 'irreparable', 'deceitfulness', 'ambivalent', 'maniacal', 'sugar-coat', 'unlamentable', 'debt', 'sadness', 'slave', 'brashness', 'rue', 'poisonous', 'debilitating', 'ineloquent', 'conceited', 'wreaked', 'bashful', 'lugubrious', 'incitement', 'stranger', 'blindside', 'debility', 'detesting', 'calamities', 'obese', 'rumple', 'hazardous', 'divisiveness', 'dread', 'disavowal', 'drunken', 'grouse', 'sag', 'demonizing', 'fussy', 'irrationality', 'acridness', 'blistering', 'bruise', 'inadequately', 'grumpiest', 'lacks', 'exorbitant', 'disagreeing', 'outrage', 'hardliner', 'famine', 'deceitful', 'devilry', 'glib', 'lackadaisical', 'apathy', 'numb', 'struggle', 'hurt', 'shemale', 'boring', 'criticizing', 'deceivers', 'discontentedly', 'ghosting', 'struggled', 'judder', 'hacks', 'sin', 'barbaric', 'emptiness', 'falsehood', 'chore', 'skimpy', 'jam', 'imaginary', 'isolation', 'discontinuity', 'suspect', 'shockingly', 'jealously', 'imperfectly', 'cancer', 'bribery', 'dent', 'slogs', 'blabber', 'spew', 'mistakes', 'mediocre', 'prejudicial', 'watered-down', 'greed', 'manipulate', 'allergies', 'guilt', 'grimace', 'unfunded', 'dullard', 'backache', 'disrespectable', 'lowly', 'slug', 'denied', 'unwillingly', 'subordinate', 'mocked', 'obsessiveness', 'fanatically', 'calumniously', 'heathen', 'inconsequent', 'debasement', 'gawk', 'taunting', 'dizzing', 'procrastinate', 'long-time', 'confused', 'malodorous', 'stupify', 'overweight', 'wreak', 'undesirable', 'mysterious', 'aggressive', 'sucked', 'coarse', 'forfeit', 'forswear', 'implausibly', 'dissing', 'inadverently', 'hefty', 'suicidal', 'rattle', 'unviewable', 'villainous', 'unsuspecting', 'ding', 'indeterminate', 'needless', 'overthrow', 'plunderer', 'bashing', 'disadvantaged', 'contravene', 'prickles', 'taut', 'heavy-handed', 'disarray', 'stall', 'tarnish', 'volatile', 'shriek', 'vilify', 'unskilled', 'hasty', 'polluters', 'aggression', 'strictly', 'petrify', 'forgetfully', 'drab', 'criticize', 'inaudible', 'shoddy', 'affront', 'infuriating', 'obstructing', 'undid', 'problem', 'downturns', 'perversion', 'harass', 'slow-moving', 'insincere', 'irreformable', 'destitute', 'imprison', 'disquietude', 'craze', 'loose', 'straining', 'unfulfilled', 'nasty', 'mordantly', 'virus', 'detriment', 'stingingly', 'inevitably', 'dirtbag', 'untrustworthy', 'hotbeds', 'conceit', 'brat', 'addicted', 'refute', 'worse', 'thorny', 'multi-polarization', 'twists', 'allegations', 'torment', 'blow', 'unraveled', 'vague', 'extravagant', 'backwoods', 'dishonesty', 'madly', 'swollen', 'hogs', 'denunciation', 'unqualified', 'dispiritedly', 'perplex', 'dwindling', 'clueless', 'expired', 'scapegoat', 'fever', 'lonesome', 'mournful', 'plasticky', 'evasion', 'uproarous', 'mangling', 'sinisterly', 'unavoidably', 'cutthroat', 'discombobulate', 'unnecessary', 'savaged', 'stooges', 'dastardly', 'shame', 'sags', 'costly', 'badly', 'fallaciously', 'disdainful', 'infection', 'disrespectablity', 'exhausts', 'chastisement', 'sad', 'desolation', 'devilish', 'comical', 'error', 'indefensible', 'sully', 'smolder', 'uneasily', 'coercive', 'ricer', 'impossible', 'obscures', 'accusingly', 'galling', 'deviate', 'agonies', 'deadbeat', 'moron', 'uneasiness', 'fake', 'scold', 'contamination', 'misaligns', 'stunt', 'dodgey', 'devastates', 'woefully', 'besmirch', 'gritty', 'virulent', 'inane', 'hysteria', 'misguided', 'mistress', 'pettifog', 'remorselessly', 'glower', 'infraction', 'perfidity', 'wreaks', 'impudence', 'bewilderment', 'sticky', 'chronic', 'cheaply', 'egotism', 'headaches', 'flair', 'irritated', 'losses', 'niggles', 'incomprehensible', 'remorseful', 'scarily', 'blurred', 'terrible', 'protesting', 'fleer', 'din', 'fraudulent', 'damaged', 'worthlessness', 'destabilisation', 'refusal', 'concern', 'payback', 'symptoms', 'crumple', 'violent', 'whimper', 'discordant', 'costlier', 'battered', 'inextricably', 'isolated', 'incredulous', 'bungler', 'weary', 'insufficiently', 'obscure', 'noises', 'distraction', 'uncompromising', 'egocentric', 'rascal', 'tantrum', 'slump', 'forlorn', 'meaningless', 'disadvantages', 'stink', 'confound', 'creaking', 'heavyhearted', 'puzzlement', 'rage', 'grief', 'beseech', 'outrageous', 'rifts', 'disaffect', 'resentment', 'disapointing', 'blurring', 'frenzy', 'frustrate', 'demoralizingly', 'bereft', 'abused', 'vanity', 'weirdly', 'usurp', 'harried', 'pestilent', 'tank', 'unpleasantries', 'misinform', 'bid-rigging', 'barbarian', 'despicable', 'horrifys', 'bedlamite', 'castrated', 'incense', 'irking', 'ridiculously', 'inevitable', 'sickening', 'unsuccessful', 'flicering', 'violators', 'ineffectually', 'peeved', 'belittle', 'brazenness', 'screwed-up', 'unpredictable', 'freezes', 'inexpert', 'brainwash', 'suffering', 'naughty', 'scandalous', 'boastful', 'leech', 'stern', 'insecurity', 'dreadful', 'annihilation', 'inanely', 'belligerently', 'capitulate', 'lazy', 'prevaricate', 'limitations', 'rejecting', 'misunderstanding', 'refutes', 'resent', 'defrauding', 'needlessly', 'squash', 'irritant', 'embroiled', 'discountenance', 'denies', 'insubstantial', 'sorrowful', 'ripped', 'harbors', 'incapable', 'jealous', 'selfish', 'adamantly', 'harden', 'indecisive', 'problems', 'belie', 'sever', 'choleric', 'mischievously', 'scathingly', 'frost', 'delinquent', 'lukewarm', 'smut', 'apprehensions', 'sneer', 'craftily', 'jutters', 'refuted', 'protracted', 'abysmal', 'deviation', 'grievances', 'fatigue', 'frustrating', 'fatcats', 'feebleminded', 'joker', 'lewdness', 'forbidden', 'uproarously', 'irksomenesses', 'dirts', 'wasted', 'unacceptably', 'derisively', 'parody', 'dinky', 'frenetically', 'obliterated', 'imperfections', 'aspersions', 'corruption', 'threaten', 'perilous', 'hamper', 'donside', 'funky', 'glitch', 'unexpected', 'squabbling', 'shroud', 'drop-outs', 'dying', 'oppress', 'distract', 'abruptly', 'madder', 'confuse', 'contend', 'uneconomical', 'licentiousness', 'ho-hum', 'slaughter', 'doubt', 'liar', 'unaffordable', 'miser', 'indecency', 'trickery', 'involuntary', 'idiocy', 'insidious', 'gloom', 'undermine', 'wretchedly', 'motley', 'self-defeating', 'pessimism', 'sabotage', 'anxiousness', 'tumultuous', 'inaccurate', 'disgusted', 'excruciatingly', 'expensive', 'struggling', 'hype', 'limitation', 'indecent', 'obscenely', 'deter', 'throttle', 'annoy', 'embroilment', 'extortion', 'nonexistent', 'snobbish', 'drastically', 'appallingly', 'backaches', 'flagrantly', 'freeze', 'temper', 'dubiously', 'thoughtlessness', 'gauche', 'deterioration', 'bump', 'dungeon', 'damnation', 'dead', 'fiasco', 'discredit', 'erroneous', 'mistake', 'unwarranted', 'sloww', 'restrict', 'insanity', 'layoff', 'curse', 'prejudge', 'misgiving', 'subdued', 'subpoenas', 'sulk', 'mysteriously', 'dejectedly', 'pathetic', 'traumatize', 'unscrupulous', 'bumpy', 'exploit', 'cranky', 'forbid', 'inhumanity', 'stupidly', 'disturbance', 'attack', 'hurtful', 'foolhardy', 'saggy', 'unspeakablely', 'wedge', 'battering', 'admonition', 'fainthearted', 'irate', 'failure', 'overwhelms', 'warned', 'plebeian', 'irreversible', 'misalign', 'recant', 'deceiver', 'lackeys', 'goofy', 'vexation', 'overblown', 'horrifying', 'imbroglio', 'pugnaciously', 'rants', 'thankless', 'gape', 'imprudence', 'cruelly', 'inflame', 'slashing', 'sufferers', 'degenerately', 'stalemate', 'conspiracy', 'alarming', 'unworthy', 'deluge', 'corrosive', 'culprit', 'inept', 'dumped', 'audaciously', 'deceiving', 'brutalizing', 'fib', 'unlawfulness', 'disputed', 'hardliners', 'squeaks', 'coercion', 'exhort', 'flairs', 'issues', 'scandal', 'reckless', 'fanatics', 'hung', 'unsupported', 'extinguish', 'displeasing', 'intimidatingly', 'harpy', 'meddlesome', 'despoil', 'wretched', 'sardonic', 'delude', 'irregular', 'scramble', 'polarisation', 'indiscretion', 'negation', 'unuseably', 'lame', 'lame-duck', 'unthinkably', 'wrong', 'redundancy', 'indecorum', 'pillage', 'disgustingly', 'questionable', 'spoilages', 'unusably', 'hoax', 'disorder', 'illusory', 'infamy', 'flawed', 'revile', 'frazzle', 'nagging', 'recklessness', 'stains', 'ailment', 'oddity', 'butcher', 'bedlam', 'bum', 'exagerate', 'insulting', 'overpriced', 'rampage', 'shipwreck', 'bewildered', 'hiss', 'blockhead', 'flaking', 'illogically', 'annoyed', 'obliterate', 'fanatical', 'bitchy', 'deficiencies', 'abnormal', 'ill-defined', 'mockeries', 'pity', 'steep', 'vice', 'profanity', 'impediment', 'gibber', 'malignant', 'boil', 'lascivious', 'doddering', 'kill', 'morons', 'sinfully', 'undercut', 'rut', 'fascism', 'remorse', 'distress', 'precipitate', 'timidity', 'dumbfound', 'ungrateful', 'lier', 'stridently', 'unjustifiably', 'dupe', 'condemnation', 'discomfort', 'anarchy', 'fundamentalism', 'strike', 'incorrigibly', 'sorry', 'vulgar', 'myth', 'spoiled', 'disconsolate', 'contortions', 'darken', 'evildoer', 'hoard', 'antagonist', 'obstruct', 'overbalance', 'nettle', 'unwell', 'downbeat', 'stigma', 'farcically', 'licentious', 'insane', 'siege', 'baffle', 'bored', 'overturn', 'pointless', 'thoughtless', 'two-faced', 'unwillingness', 'dragging', 'taunts', 'complacent', 'dishonor', 'errant', 'fathomless', 'illogical', 'lamentable', 'malevolence', 'racism', 'raped', 'revulsion', 'unjustly', 'imperil', 'dislocated', 'nervous', 'lethargic', 'worrying', 'blunder', 'undercuts', 'acrimony', 'itchy', 'overplay', 'eviscerate', 'awfulness', 'hopeless', 'nervousness', 'setbacks', 'deceive', 'corrupted', 'inefficient', 'pitiless', 'unfavorable', 'moronic', 'misses', 'stumps', 'accusations', 'improbably', 'blandish', 'viciously', 'maliciousness', 'deadly', 'mourn', 'squander', 'depressed', 'forged', 'unresponsive', 'improperly', 'buzzing', 'adversity', 'worrier', 'contrariness', 'wretch', 'curt', 'overheat', 'pest', 'disobedient', 'officious', 'forebodingly', 'ruin', 'problematic', 'discouragement', 'laughingstock', 'sub-par', 'troubling', 'vibrating', 'contemptuously', 'dishonest', 'terrorize', 'untruthful', 'urgent', 'trapped', 'wickedness', 'downcast', 'befoul', 'loath', 'laughably', 'lagging', 'over-priced', 'treacherous', 'vestiges', 'farfetched', 'instability', 'defunct', 'fudge', 'fallen', 'irritably', 'misbehavior', 'rigid', 'doubtfully', 'wobble', 'congestion', 'wilt', 'bumped', 'delirious', 'frighten', 'mendacity', 'mistified', 'taxing', 'two-faces', 'wripping', 'insubstantially', 'hazard', 'sty', 'dishonorable', 'mock', 'unconstitutional', 'anarchistic', 'miscalculation', 'drawback', 'naive', 'aggravate', 'draining', 'laggy', 'prosecute', 'conservative', 'acrid', 'smutty', 'unfortunately', 'languor', 'bulkyness', 'hegemony', 'obsolete', 'drippy', 'shiver', 'unhealthy', 'obscene', 'snobs', 'struck', 'scarred', 'pillory', 'overtaxed', 'conspiracies', 'hasseling', 'incompliant', 'rollercoaster', 'bullyingly', 'dissocial', 'arduously', 'bruises', 'qualms', 'suffocate', 'batty', 'devastation', 'irritable', 'oddities', 'exhausted', 'pauper', 'jeering', 'diabolic', 'downturn', 'seethe', 'painful', 'craftly', 'diatribe', 'flickering', 'disaccord', 'disfavor', 'tragically', 'repressive', 'touted', 'neurotically', 'protest', 'torture', 'stump', 'wripped', 'flaky', 'embarrassingly', 'mudslinging', 'quibble', 'cruelty', 'extravagantly', 'inescapable', 'extermination', 'negatives', 'retreated', 'defensive', 'goad', 'overbearing', 'inconsiderately', 'risks', 'taunt', 'threesome', 'slumpping', 'uncomfortably', 'broke', 'hysteric', 'redundant', 'restlessness', 'defile', 'awful', 'hardball', 'debaser', 'fuck', 'insignificantly', 'malicious', 'mundane', 'crept', 'doubtful', 'deplore', 'chintzy', 'dispiriting', 'depression', 'decrement', 'lecherous', 'unreasonable', 'rhapsodize', 'downsides', 'cringe', 'desiccate', 'blaspheme', 'drawbacks', 'lone', 'fleed', 'pique', 'immovable', 'puppets', 'unuseable', 'chill', 'condescending', 'depressing', 'distressed', 'draconian', 'simplistic', 'destitution', 'barbarous', 'betrayer', 'brutalising', 'ill-formed', 'heck', 'pessimistic', 'hateful', 'solemn', 'massacre', 'mudslinger', 'reprove', 'hideous', 'traumatically', 'insufficiency', 'muscle-flexing', 'humid', 'rotten', 'adverse', 'betrayals', 'dreary', 'matte', 'vociferously', 'threats', 'flicker', 'stormy', 'sermonize', 'subjugate', 'facetious', 'inconceivable', 'unsettled', 'entrap', 'incautious', 'freak', 'entrapment', 'biased', 'complaints', 'outlaw', 'irksomely', 'displease', 'haste', 'incivility', 'extremism', 'instable', 'afflict', 'despondency', 'impulsively', 'fiend', 'avenge', 'unwise', 'impending', 'traped', 'incoherently', 'clogged', 'treasonous', 'misjudgment', 'dubitable', 'asunder', 'adulterier', 'culpable', 'gutless', 'quarrellous', 'deluded', 'temerity', 'sarcasm', 'unemployed', 'fulminate', 'insensitivity', 'faze', 'sweaty', 'vagrant', 'barbarously', 'distraught', 'enraging', 'morbid', 'faulty', 'uglier', 'ultra-hardline', 'detested', 'idle', 'impertinent', 'dissidence', 'brute', 'hardened', 'screech', 'castigate', 'oversights', 'scandals', 'disillusion', 'misunderstand', 'spinster', 'burn', 'freezing', 'corrode', 'ache', 'invader', 'desolate', 'scorn', 'shamefully', 'apologists', 'condemned', 'undermining', 'confounding', 'aggravating', 'confession', 'smelt', 'wince', 'bloodthirsty', 'exaggeration', 'inopportune', 'antithetical', 'ruffle', 'indelicate', 'viciousness', 'dictatorial', 'fleeting', 'junkyard', 'discordance', 'monstrously', 'refusing', 'susceptible', 'tortuous', 'unproves', 'wickedly', 'emphatically', 'detest', 'egotistically', 'loss', 'helpless', 'whips', 'exorbitantly', 'devastatingly', 'offending', 'hater', 'diabolically', 'subjugation', 'detestable', 'reprehension', 'waste', 'feckless', 'cheats', 'immaterial', 'condemns', 'goading', 'scoff', 'spade', 'sucky', 'dissension', 'iniquity', 'traitorous', 'strenuous', 'lurid', 'back-wood', 'fateful', 'languorously', 'overthrows', 'downgrade', 'fearful', 'tiringly', 'dissatisfaction', 'clamor', 'ignorance', 'undersized', 'deteriorating', 'retardedness', 'sobering', 'inappropriately', 'enjoin', 'unworkable', 'grudgingly', 'admonisher', 'bonkers', 'disgrace', 'frenetic', 'leaky', 'cuss', 'lapse', 'mislike', 'elimination', 'scrambles', 'stampede', 'dings', 'testy', 'tyrannically', 'unclean', 'maladjustment', 'manipulators', 'spewing', 'crass', 'astray', 'mad', 'spotty', 'ugliness', 'absentee', 'deceptively', 'haunt', 'unsure', 'gnawing', 'demonizes', 'blasphemous', 'ill-advised', 'cruelties', 'demonize', 'tarnished', 'unsecure', 'tentatively', 'stole', 'unachievable', 'extremists', 'failures', 'lacking', 'perplexed', 'recessionary', 'demonic', 'fails', 'injure', 'inexpertly', 'anarchism', 'gloatingly', 'quarrellously', 'senseless', 'hinder', 'unjust', 'shirk', 'extort', 'unthinkable', 'amiss', 'disagreement', 'impaired', 'maledict', 'overawe', 'cataclysmically', 'senile', 'obstructs', 'scandalize', 'spookiest', 'restrictive', 'creep', 'self-criticism', 'imposition', 'illegally', 'unconfirmed', 'mispronounce', 'grossly', 'ill-natured', 'intimidating', 'irk', 'obstruction', 'cronyism', 'fastidious', 'juddering', 'misunderstood', 'hostage', 'secretive', 'stab', 'tempest', 'arrogance', 'messing', 'delirium', 'uncollectible', 'diappointed', 'bewilder', 'dissapointed', 'scams', 'perturb', 'graceless', 'faithless', 'drunk', 'shameful', 'futile', 'ferociously', 'outburst', 'scandalized', 'unseemly', 'disasterous', 'cringes', 'crappy', 'zealot', 'contrive', 'killjoy', 'onerously', 'sucker', 'listless', 'perplexity', 'clogs', 'grudge', 'pains', 'antipathy', 'illicit', 'impatience', 'excuse', 'disintegrates', 'disappointments', 'subvert', 'discoutinous', 'midget', 'posturing', 'scuff', 'scoundrel', 'apathetic', 'gravely', 'mocking', 'hallucination', 'backward', 'dies', 'fanaticism', 'jabber', 'complained', 'misguidance', 'opinionated', 'solicitude', 'unreasonably', 'farcical', 'despairingly', 'irony', 'fictional', 'niggle', 'crash', 'uproarious', 'hurting', 'unhappy', 'offender', 'lie', 'boycott', 'weird', 'injurious', 'chaos', 'unproven', 'repudiation', 'lure', 'impasse', 'unresolved', 'inconsistency', 'collude', 'endanger', 'narrower', 'stumbles', 'inflammed', 'ignore', 'indeterminably', 'capriciously', 'inequality', 'regression', 'recklessly', 'steal', 'betraying', 'fist', 'foul', 'jobless', 'seedy', 'shit', 'misjudge', 'sneakily', 'maddening', 'galls', 'audacious', 'disturb', 'impenitent', 'impunity', 'poison', 'un-viewable', 'sorely', 'distracting', 'agonizingly', 'tacky', 'prejudice', 'invalid', 'disapprobation', 'bullies', 'horrific', 'inadequacy', 'sarcastically', 'stupified', 'disdainfully', 'recession', 'strut', 'foreboding', 'criticism', 'sacrificed', 'freakishly', 'apathetically', 'standstill', 'plunder', 'decline', 'presumptuous', 'illiterate', 'dreadfully', 'onslaught', 'crumble', 'dazed', 'vengeful', 'declining', 'disrespectful', 'insurmountable', 'grumpier', 'starve', 'bereave', 'sidetrack', 'blame', 'lawbreaking', 'oddest', 'oppose', 'audaciousness', 'torturously', 'deceptive', 'life-threatening', 'sputter', 'one-sided', 'smugly', 'disparage', 'demoralizing', 'foolishness', 'barbarity', 'chilly', 'diatribes', 'scam', 'vainly', 'crumbling', 'loathly', 'subpoena', 'alarm', 'discontinued', 'blur', 'exasperation', 'paradoxically', 'relentlessly', 'reviled', 'revulsive', 'distasteful', 'sue', 'damaging', 'degradation', 'dawdle', 'dizzy', 'egotistical', 'hells', 'inoperable', 'irrationals', 'needy', 'perplexing', 'unreliable', 'catastrophically', 'deform', 'parasite', 'stinks', 'weakness', 'babble', 'martyrdom-seeking', 'exorbitantance', 'headache', 'gripe', 'feverish', 'reprehensible', 'credulous', 'snob', 'stupid', 'deformed', 'worryingly', 'lawlessness', 'coldly', 'restless', 'calamitous', 'misread', 'delinquency', 'fault', 'frustration', 'insurmountably', 'screw-up', 'direness', 'drain', 'rremediable', 'lament', 'grieve', 'immoral', 'grapple', 'aweful', 'cuplrit', 'dissemble', 'roadblocks', 'troublesome', 'reproach', 'floored', 'lag', 'dispirit', 'funny', 'shocking', 'traitorously', 'bullying', 'overpayed', 'aggressiveness', 'reprimand', 'malcontented', 'warp', 'menacing', 'arcane', 'indecisively', 'disclaim', 'leaks', 'besiege', 'outcry', 'subversively', 'dilly-dally', 'enemy', 'annoys', 'infringements', 'cursed', 'cripples', 'rude', 'fallacies', 'stiff', 'horrendous', 'scummy', 'undone', 'shake', 'disregardful', 'missed', 'poorest', 'ineffectualness', 'unfounded', 'premeditated', 'abrade', 'unequal', 'lewdly', 'repugnant', 'wobbles', 'disorient', 'sluts', 'worn', 'hissing', 'hostility', 'frustrates', 'suspicious', 'peculiarly', 'fragile', 'bicker', 'measly', 'peevish', 'irreconcilable', 'inadvisable', 'persecute', 'appalling', 'inelegant', 'unpopular', 'caricature', 'dilapidated', 'tarnishes', 'denying', 'forceful', 'slanderer', 'desperation', 'dejected', 'heartbreaking', 'unsteadily', 'helplessly', 'frictions', 'irretrievable', 'cripple', 'greedy', 'miserly', 'burns', 'blackmail', 'controversial', 'disrepute', 'creeping', 'picketing', 'instigators', 'smack', 'frozen', 'leery', 'abominably', 'snagging', 'stinging', 'inexorable', 'bitingly', 'fraught', 'bewilderingly', 'shambles', 'terribly', 'radicalization', 'bitch', 'disruption', 'paralyzed', 'wretchedness', 'gruesomely', 'insupportable', 'blah', 'superstition', 'craven', 'rant', 'fall', 'tardy', 'dissention', 'compulsion', 'dumb', 'bunk', 'stresses', 'disapproval', 'peculiar', 'symptom', 'troubled', 'cramp', 'inefficacious', 'tyrannical', 'venom', 'deceit', 'disruptive', 'insignificant', 'pinch', 'distraughtness', 'anxiety', 'rumor', 'cataclysmic', 'disavow', 'immoderately', 'nebulous', 'blatant', 'dissonantly', 'fume', 'uneven', 'venomously', 'vibrate', 'bombastic', 'complicated', 'flareup', 'froze', 'inattentive', 'burning', 'disappoint', 'downfall', 'misbehave', 'immobilized', 'remorseless', 'shadowy', 'irrecoverableness', 'caustic', 'disagree', 'flirt', 'grudging', 'unforgiving', 'petty', 'whining', 'lamentably', 'indiscernible', 'sneak', 'mischief', 'stealing', 'dreadfulness', 'strangely', 'plagiarize', 'brainless', 'discontented', 'sloppy', 'disunity', 'insinuation', 'meanness', 'unmoved', 'oversize', 'misaligned', 'disagrees', 'tentative', 'pollute', 'weariness', 'spoilage', 'arrogantly', 'mournfully', 'spoon-fed', 'totalitarian', 'monstrosity', 'weed', 'angry', 'shallow', 'whore', 'carp', 'disagreeably', 'irascible', 'penalize', 'dispirited', 'despondent', 'hell-bent', 'douchebag', 'commiserate', 'backbiting', 'stubbornly', 'dogmatic', 'sinful', 'insultingly', 'overstatements', 'disobedience', 'unlamentably', 'wound', 'droop', 'decrepitude', 'defame', 'forlornly', 'spitefully', 'devoid', 'aggrieve', 'exhaustion', 'disintegrated', 'grating', 'insurrection', 'scornfully', 'scratch', 'disgustful', 'perverse', 'unacceptable', 'weaken', 'hegemonistic', 'decadent', 'worst', 'disputable', 'skulk', 'entangle', 'quitter', 'gallingly', 'mystify', 'chagrin', 'smokescreen', 'wrongful', 'brood', 'impotent', 'unrealistic', 'complication', 'fumes', 'threatening', 'inescapably', 'unipolar', 'annoyance', 'adamant', 'fatigued', 'assassinate', 'bereavement', 'concens', 'blather', 'sickness', 'critics', 'mendacious', 'ignorant', 'self-humiliation', 'fatty', 'jeopardize', 'tedious', 'dragoon', 'insincerity', 'ridicules', 'boisterous', 'despicably', 'imminently', 'inordinate', 'pout', 'hedonistic', 'lewd', 'futilely', 'disgustedly', 'worries', 'gabble', 'extraneous', 'sloppily', 'persecution', 'undetermined', 'strict', 'monstrosities', 'crummy', 'uninsured', 'accusing', 'undue', 'blunt', 'embattled', 'odor', 'slut', 'litigious', 'eruptions', 'obsessive', 'evade', 'delay', 'rabid', 'slanderously', 'chunky', 'subversive', 'illegal', 'run-down', 'scarier', 'abuse', 'back-logged', 'bristle', 'incredulously', 'ruffian', 'drained', 'fatalistic', 'furor', 'intrusion', 'refuting', 'repulsively', 'slur', 'underdog', 'wayward', 'overstatement', 'insulted', 'flighty', 'insolence', 'grouch', 'deadweight', 'fidgety', 'ill-conceived', 'unneeded', 'blatantly', 'animosity', 'cry', 'enemies', 'expire', 'fraud', 'glaringly', 'hothead', 'stutters', 'inculcate', 'sting', 'sues', 'obstacle', 'gaffe', 'incorrect', 'inhibition', 'loophole', 'caustically', 'suspicion', 'dissident', 'harboring', 'irresolvable', 'suicide', 'warning', 'polution', 'discouraging', 'd*mn', 'flares', 'boredom', 'incessant', 'dark', 'reluctance', 'skittish', 'hard-liner', 'rigidness', 'treacherously', 'egregious', 'misbecoming', 'offenses', 'drips', 'stuffy', 'immorally', 'err', 'conceded', 'trashy', 'unauthentic', 'difficulties', 'bitter', 'detrimental', 'hatefully', 'quash', 'misinterpret', 'bleed', 'death', 'critical', 'discontent', 'itching', 'reproachful', 'inadvisably', 'misstatement', 'unethical', 'shark', 'vengefulness', 'cracks', 'filthy', 'beggarly', 'gullible', 'skeptical', 'intrude', 'stressful', 'trap', 'brazenly', 'ragged', 'ramshackle', 'ignoble', 'impolitic', 'gimmick', 'flare', 'fearfully', 'despotism', 'steals', 'sunder', 'sink', 'unsupportive', 'pointlessly', 'absurd', 'gimmicks', 'licentiously', 'dissonance', 'imbecile', 'misreading', 'brutish', 'berate', 'absent-minded', 'aspersion', 'estranged', 'aborted', 'inconsiderate', 'topple', 'tumbles', 'unable', 'neglect', 'asperse', 'obstructed', 'blurt', 'desecrate', 'distrust', 'harshly', 'fatuous', 'panicking', 'stringent', 'trouble', 'uncompromisingly', 'complex', 'vibration', 'worry', 'zealous', 'gawky', 'grate', 'hassle', 'smug', 'warped', 'avarice', 'skepticism', 'flees', 'unproductive', 'malign', 'unnerving', 'erratic', 'overzealous', 'vociferous', 'unclear', 'refuses', 'allergic', 'break-ups', 'flagging', 'bust', 'lackey', 'nettlesome', 'dangerous', 'tangled', 'undecided', 'spook', 'imprecisely', 'allergy', 'moot', 'rival', 'killer', 'discomfit', 'discourteous', 'plotters', 'cloud', 'pig', 'vexing', 'full-blown', 'resignation', 'slaughtered', 'felonious', 'unwieldy', 'scandels', 'frigging', 'dissuasive', 'inconsequentially', 'debauch', 'tired', 'misuse', 'humiliating', 'lunaticism', 'sloooooooooooooow', 'distrusting', 'dejection', 'innuendo', 'perilously', 'doldrums', 'inhumane', 'brutalize', 'irritate', 'spoils', 'polluter', 'hobble', 'nauseates', 'blockage', 'disobey', 'downheartedly', 'cautionary', 'rocky', 'second-tier', 'loathsome', 'irresolute', 'precipitous', 'rejection', 'carelessness', 'knave', 'exasperate', 'disrespectfulness', 'stain', 'crooked', 'impious', 'quack', 'manipulation', 'foully', 'incomparably', 'stolen', 'restriction', 'lousy', 'addicts', 'balk', 'stalls', 'pry', 'unobserved', 'panicked', 'forsaken', 'gross', 'intimidation', 'stunted', 'sueing', 'unravel', 'debts', 'depressions', 'grievously', 'objections', 'anti-proliferation', 'unwisely', 'direly', 'blind', 'fatal', 'indeterminable', 'suppress', 'friction', 'low-rated', 'bickering', 'vain', 'flagrant', 'debaucher', 'ominous', 'offend', 'sunk', 'plaything', 'blameworthy', 'monster', 'uncertain', 'impoverished', 'panick', 'laughable', 'hampered', 'distortion', 'misrepresent', 'stagnation', 'sensationalize', 'overact', 'venomous', 'jumpy', 'wrest', 'addict', 'languid', 'ironical', 'invidious', 'feign', 'phobia', 'overloaded', 'improper', 'jeer', 'scary', 'malaise', 'unhappily', 'repetitive', 'prohibitively', 'repel', 'betrayal', 'bores', 'pricier', 'unexpectedly', 'menace', 'abrasive', 'confess', 'somber', 'unsteadiness', 'stifling', 'eschew', 'revolting', 'panders', 'wrongly', 'yawn', 'vent', 'unleash', 'suck', 'tenderness', 'hastily', 'rebuke', 'subtract', 'imperiously', 'harangue', 'chafe', 'ulterior', 'troublesomely', 'fissures', 'frighteningly', 'occludes', 'shrouded', 'omission', 'disastrous', 'inextricable', 'toll', 'sourly', 'dull', 'leak', 'friggin', 'punk', 'runaway', 'fluster', 'pernicious', 'overacted', 'partiality', 'wiles', 'twist', 'sketchy', 'unwelcome', 'upsetting', 'disorderly', 'washed-out', 'irregularity', 'bragger', 'neglected', 'opportunistic', 'pitilessly', 'biases', 'agonizing', 'inveigle', 'lividly', 'sour', 'loopholes', 'strained', 'misfortune', 'disallow', 'illusions', 'nebulously', 'slumping', 'unsteady', 'disastrously', 'inflationary', 'discriminate', 'dissidents', 'bemused', 'nuisance', 'rip-off', 'deplorable', 'hiliarious', 'sickeningly', 'smallish', 'staid', 'begging', 'condescend', 'nauseatingly', 'infested', 'inconsolably', 'poisonously', 'torturing', 'sadden', 'lambast', 'tanked', 'paupers', 'callous', 'upseting', 'oblivious', 'dictator', 'nitpicking', 'quarrel', 'destroyer', 'creak', 'refused', 'famished', 'tenuously', 'bs', 'loathing', 'troublingly', 'self-interested', 'freakish', 'wheedle', 'ashamed', 'rejects', 'bloody', 'concede', 'dissappointed', 'subservient', 'died', 'detests', 'eccentric', 'abort', 'haughty', 'disloyalty', 'inexpiable', 'inferior', 'criticized', 'satirize', 'unforeseen', 'overpaid', 'misgivings', 'plight', 'issue', 'left-leaning', 'heretic', 'dim', 'f**k', 'pitifully', 'teasingly', 'bullshit', 'exasperatingly', 'limits', 'conflicts', 'timidly', 'rigidity', 'shrilly', 'careless', 'disillusionment', 'counter-productive', 'frigid', 'fatique', 'effigy', 'daze', 'disintegrate', 'mawkishly', 'shirker', 'wearisome', 'travesty', 'nosey', 'infiltrator', 'overemphasize', 'fractiously', 'snare', 'startling', 'flareups', 'inapt', 'revengeful', 'superstitious', 'guilty', 'calumnies', 'danger', 'dissuade', 'scorchingly', 'inequalities', 'aggressor', 'infamously', 'overrun', 'abominable', 'earsplitting', 'evils', 'complicit', 'skeletons', 'ghastly', 'zombie', 'prohibitive', 'misery', 'inaction', 'oppression', 'fat', 'anti-american', 'contort', 'boggle', 'unacceptablely', 'strident', 'tingling', 'election-rigger', 'loot', 'miscreants', 'complaint', 'scandel', 'wary', 'stutter', 'disconsolation', 'unaccessible', 'indiscreet', 'pain', 'ruinous', 'unsophisticated', 'inflict', 'felon', 'defective', 'butchery', 'impossibly', 'infernal', 'ire', 'mistaken', 'protested', 'mope', 'submissive', 'jitter', 'anti-social', 'sloth', 'glut', 'cruel', 'longingly', 'bumping', 'cynical', 'disbeliever', 'quarrels', 'mispronounced', 'unbearablely', 'perversity', 'fury', 'killed', 'throb', 'assail', 'limited', 'pitiful', 'painfull', 'fruitlessly', 'hang', 'biting', 'sugarcoated', 'crushing', 'oppressiveness', 'job-killing', 'zaps', 'unrelenting', 'fawningly', 'overwhelmingly', 'touchy', 'strangle', 'undependability', 'unlicensed', 'idiots', 'bizarre', 'untouched', 'tarnishing', 'lumpy', 'haggle', 'ludicrous', 'mists', 'temptation', 'counterproductive', 'tingled', 'trivialize', 'leaking', 'declines', 'invasive', 'infest', 'bombardment', 'fuss', 'revenge', 'disingenuous', 'clique', 'allege', 'fear', 'contradictory', 'fretful', 'miscellaneous', 'rot', 'disquieting', 'impudent', 'rivalry', 'distorts', 'bleeds', 'scuffs', 'fabrication', 'unproving', 'incite', 'smoldering', 'fiction', 'cold', 'spoil', 'maltreatment', 'deploringly', 'conspicuous', 'blindingly', 'horrifies', 'jaded', 'nauseating', 'ugly', 'hypocrites', 'mocks', 'imprecise', 'incommensurate', 'water-down', 'miss', 'over-awe', 'hum', 'obsess', 'devastating', 'livid', 'pratfall', 'flakieness', 'confusions', 'crazy', 'ruining', 'disliked', 'beguile', 'hard-hit', 'mockingly', 'stale', 'loathe', 'bluring', 'mawkish', 'unnerved', 'degrade', 'inarticulate', 'regrettable', 'mistrustful', 'brimstone', 'overzealously', 'regrets', 'uncomfortable', 'ravage', 'heretical', 'insolvent', 'detracted', 'snagged', 'calumniate', 'pertinacious', 'rift', 'terror-genic', 'tiring', 'scare', 'lifeless', 'discontinuous', 'stooge', 'misdirection', 'gruff', 'demolish', 'obstinately', 'disgust', 'backaching', 'hassled', 'inaccurately', 'rattles', 'negligence', 'corrupts', 'brash', 'dismal', 'zealously', 'devil', 'inaccuracy', 'seething', 'unwilling', 'wounds', 'sugar-coated', 'congested', 'distressingly', 'extravagance', 'accursed', 'inefficacy', 'audiciously', 'adulterated', 'beware', 'catastrophic', 'dishearten', 'lagged', 'offensiveness', 'anguish', 'flat-out', 'censure', 'miserable', 'villains', 'menacingly', 'demoralize', 'chaff', 'vindictiveness', 'giddy', 'mar', 'ironies', 'belittled', 'noxious', 'ineffectiveness', 'bulkier', 'spoilled', 'taboo', 'punitive', 'bomb', 'improbable', 'cheap', 'inconceivably', 'jerky', 'shunned', 'fat-cat', 'false', 'disgraceful', 'injudicious', 'lunatic', 'hothouse', 'infuriated', 'dumping', 'droops', 'aching', 'hopelessness', 'revoltingly', 'anomalous', 'desultory', 'disingenuously', 'crabby', 'discourage', 'far-fetched', 'inexcusable', 'curses', 'lost', 'paralize', 'defiant', 'arrogant', 'nonsense', 'pitiable', 'disinclination', 'adversarial', 'worriedly', 'confrontation', 'shortness', 'thumbs-down', 'cruelest', 'idiot', 'loud', 'louder', 'moan', 'intimidate', 'inaccuracies', 'fanciful', 'aimless', 'horrified', 'tetchily', 'craps', 'deception', 'harmed', 'hindrance', 'repulse', 'inexorably', 'murderer', 'mist', 'oppressively', 'semi-retarded', 'shrew', 'immodest', 'snags', 'crowded', 'vehement', 'volatility', 'chaotic', 'bewildering', 'evil', 'enraged', 'jeeringly', 'sardonically', 'equivocal', 'impetuous', 'diabolical', 'contaminates', 'poverty', 'catastrophes', 'slime', 'declaim', 'dislikes', 'embarrass', 'furiously', 'gainsay', 'garish', 'impatient', 'oppressors', 'stuck', 'discompose', 'epidemic', 'spilling', 'inadverent', 'apocalyptic', 'hypocritically', 'savage', 'cheat', 'hostile', 'imbalance', 'jaundiced', 'puzzled', 'stuttering', 'sued', 'unsuccessfully', 'hissed', 'irrelevant', 'irresponsible', 'lull', 'opposition', 'over-hyped', 'beset', 'dehumanize', 'dripped', 'gimmicked', 'kooky', 'hysterically', 'disconcerting', 'pugnacious', 'ruins', 'stodgy', 'soapy', 'incomprehension', 'indiscriminating', 'discriminatory', 'ineligible', 'disaffected', 'lapses', 'smudge', 'smudged', 'defects', 'fatuously', 'havoc', 'imperialist', 'enmity', 'inconvenience', 'subjected', 'belabor', 'expunge', 'gaudy', 'breakups', 'gruesome', 'defamations', 'opponent', 'resistance', 'malcontent', 'unexplained', 'glitches', 'harasses', 'blurs', 'delusions', 'heinous', 'irritation', 'nonresponsive', 'degenerate', 'muddle', 'disown', 'sagging', 'god-awful', 'derisive', 'desiccated', 'immature', 'inexperienced', 'pretense', 'banalize', 'adversary', 'freaks', 'unkindly', 'capricious', 'stagnate', 'decry', 'limit', 'effrontery', 'puzzling', 'riled', 'vindictive', 'incompatibility', 'racist', 'cringed', 'snarky', 'stingy', 'stereotype', 'rubbish', 'helplessness', 'layoff-happy', 'miseries', 'pretend', 'worthless', 'devastate', 'abuses', 'snarl', 'insecure', 'twisted', 'sap', 'crush', 'primitive', 'malevolent', 'disloyal', 'destructive', 'whine', 'squeaky', 'slanderous', 'bankrupt', 'aggravation', 'villianous', 'dispute', 'bloated', 'grudges', 'belligerent', 'heedless', 'indoctrination', 'antiquated', 'long-winded', 'fallacy', 'moribund', 'domineering', 'disordered', 'intransigence', 'preposterous', 'murderous', 'mess', 'blasphemy', 'impiety', 'miserably', 'bully', 'jealousness', 'slack', 'bait', 'harmful', 'infuriate', 'poorly', 'rascals', 'shamefulness', 'poor', 'disbelieve', 'defy', 'immoderate', 'imminence', 'indifferent', 'appall', 'jarring', 'aggrivation', 'terrorism', 'pessimistically', 'insignificance', 'hardheaded', 'jolt', 'darkened', 'uncooperative', 'smash', 'monstrous', 'thumb-down', 'wrath', 'freaking', 'crashed', 'facetiously', 'fatefully', 'inexplainable', 'rip', 'perverts', 'squealing', 'floundering', 'meager', 'scrambled', 'lying', 'monotony', 'unhappiness', 'frantically', 'passiveness', 'blunders', 'disapointed', 'torrent', 'bemoaning', 'implication', 'incompetently', 'hurted', 'figurehead', 'stereotypically', 'meddle', 'entanglement', 'oversimplification', 'mistakenly', 'repress', 'uncivil', 'hardhearted', 'dilemma', 'phony', 'implode', 'assult', 'unfit', 'regretted', 'traumatic', 'revert', 'ostracize', 'mystery', 'disses', 'rusts', 'stun', 'obsessively', 'martyrdom', 'overbearingly', 'pathetically', 'destruction', 'irrational', 'invisible', 'lesser-known', 'relapse', 'self-destructive', 'deny', 'smudging', 'fetid', 'catastrophies', 'horrid', 'achey', 'scariest', 'enervate', 'smelly', 'ultimatums', 'split', 'hesitant', 'deprive', 'belittling', 'iniquitous', 'outbursts', 'resurgent', 'cynicism', 'enviously', 'coerce', 'emphatic', 'deviously', 'paucity', 'expropriate', 'disprove', 'discouragingly', 'deviousness', 'unwanted', 'regretfully', 'steeply', 'bloodshed', 'over-acted', 'angrily', 'delays', 'addicting', 'condescension', 'cumbersome', 'misrepresentation', 'procrastinates', 'uncontrolled', 'murderously', 'thrash', 'gimmicky', 'expropriation', 'rebellious', 'weakening', 'slanders', 'flak', 'infections', 'usurper', 'unilateralism', 'scandalously', 'halfhearted', 'pretentiously', 'shortcoming', 'dishonorablely', 'despairing', 'oversight', 'racy', 'sillily', 'smuttier', 'pugnacity', 'vexingly', 'massacres', 'excoriate', 'madness', 'denial', 'admonishingly', 'swindle', 'thug', 'tricked', 'ineptitude', 'bitterly', 'rusty', 'mulish', 'timidness', 'disagreed', 'inaptitude', 'incompetence', 'ridiculous', 'toxic', 'vile', 'baffling', 'tetchy', 'screwy', 'strain', 'beastly', 'hideously', 'deprecate', 'pedantic', 'misleadingly', 'offensively', 'horrible', 'screwed', 'bulky', 'ludicrously', 'exasperated', 'halfheartedly', 'consternation', 'draconic', 'impedance', 'crisis', 'stumble', 'incognizant', 'ingrate', 'smells', 'abusive', 'brutalities', 'flimsy', 'scaly', 'toil', 'remorselessness', 'browbeat', 'concerns', 'forgetfulness', 'desertion', 'pertinacity', 'picket', 'busybody', 'wail', 'jitters', 'dismaying', 'inundate', 'assault', 'bruising', 'disquietingly', 'unprepared', 'damages', 'wily', 'unlawful', 'drains', 'buggy', 'defamation', 'glibly', 'disgustfully', 'inimically', 'satirical', 'suffered', 'unnaturally', 'inclement', 'ineptly', 'partisan', 'forgetful', 'mangle', 'dearth', 'clash', 'misapprehend', 'unstable', 'merciless', 'repulsiveness', 'splatter', 'accuse', 'misbecome', 'selfinterested', 'fret', 'dastard', 'burden', 'egregiously', 'unspeakable', 'unappealing', 'smother', 'lambaste', 'inflammatory', 'traduce', 'predicament', 'divisively', 'fastuous', 'unfeeling', 'embarrassment', 'sass', 'commotions', 'crippling', 'selfishness', 'defiler', 'hotheaded', 'overstate', 'regretful', 'ruthless', 'forsake', 'creaks', 'junky', 'contaminate', 'dogged', 'messy', 'exhaust', 'banal', 'incompetent', 'subservience', 'superficially', 'delusional', 'woeful', 'irresponsibly', 'disdained', 'lurking', 'scratchy', 'stark', 'swelling', 'fragmented', 'demolisher', 'troublemaker', 'fat-cats', 'reactionary', 'chastise', 'upheaval', 'illusion', 'braggart', 'snappish', 'overshadow', 'onerous', 'confuses', 'stiflingly', 'scoldingly', 'raping', 'ineffectual', 'stifle', 'outbreak', 'unrest', 'concerned', 'outcast', 'obscured', 'ranting', 'resentful', 'ruts', 'vomiting', 'cussed', 'berserk', 'alarmed', 'invective', 'insinuating', 'disable', 'defiantly', 'humiliation', 'frown', 'plea', 'scornful', 'self-serving', 'malice', 'reluctant', '2-faces', 'undefined', 'violation', 'flout', 'loses', 'repugnantly', 'unease', 'crumpled', 'simplistically', 'startle', 'cliched', 'rile', 'irretating', 'apprehensively', 'aloof', 'demonized', 'eccentricity', 'adulterate', 'inactive', 'botch', 'gall', 'punish', 'spookily', 'dismissively', 'wane', 'fell', 'criminal', 'mistrustfully', 'stupor', 'misleading', 'damper', 'uneventful', 'despondence', 'bastards', 'brutal', 'scared', 'prickle', 'darker', 'conscons', 'dud']
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}13}]:} \PY{k}{def} \PY{n+nf}{emphasize\PYZus{}pos\PYZus{}and\PYZus{}neg\PYZus{}words}\PY{p}{(}\PY{n}{text}\PY{p}{)}\PY{p}{:}
+             \PY{n}{t} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+             \PY{k}{for} \PY{n}{w} \PY{o+ow}{in} \PY{n}{text}\PY{o}{.}\PY{n}{split}\PY{p}{(}\PY{p}{)}\PY{p}{:}
+                 \PY{k}{if} \PY{n}{w} \PY{o+ow}{in} \PY{n}{positive\PYZus{}word\PYZus{}library}\PY{p}{:}
+                     \PY{n}{t}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZlt{}positive\PYZgt{} }\PY{l+s+s1}{\PYZsq{}} \PY{o}{+} \PY{n}{w}\PY{p}{)}
+                 \PY{k}{elif} \PY{n}{w} \PY{o+ow}{in} \PY{n}{negative\PYZus{}word\PYZus{}library}\PY{p}{:}
+                     \PY{n}{t}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZlt{}negative\PYZgt{} }\PY{l+s+s1}{\PYZsq{}} \PY{o}{+} \PY{n}{w}\PY{p}{)}
+                 \PY{k}{else}\PY{p}{:}
+                     \PY{n}{t}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{w}\PY{p}{)}
+             \PY{n}{newTweet} \PY{o}{=} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{ }\PY{l+s+s2}{\PYZdq{}}\PY{o}{.}\PY{n}{join}\PY{p}{(}\PY{n}{t}\PY{p}{)}
+             \PY{k}{return} \PY{n}{newTweet}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}14}]:} \PY{n}{emphasize\PYZus{}pos\PYZus{}and\PYZus{}neg\PYZus{}words}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{ i}\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{m really sad about charlotte though}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}14}]:} "i'm really <negative> sad about charlotte though"
+\end{Verbatim}
+            
+    \#Clean hashtag
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}15}]:} \PY{n}{e} \PY{o}{=} \PY{n}{Analyzer}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}16}]:} \PY{k}{def} \PY{n+nf}{extract\PYZus{}hashtag}\PY{p}{(}\PY{n}{text}\PY{p}{)}\PY{p}{:}
+             \PY{n}{hash\PYZus{}list} \PY{o}{=} \PY{p}{(}\PY{p}{[}\PY{n}{re}\PY{o}{.}\PY{n}{sub}\PY{p}{(}\PY{l+s+sa}{r}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{(}\PY{l+s+s2}{\PYZbs{}}\PY{l+s+s2}{W+)\PYZdl{}}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{i}\PY{p}{)} \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n}{text}\PY{o}{.}\PY{n}{split}\PY{p}{(}\PY{p}{)} \PY{k}{if} \PY{n}{i}\PY{o}{.}\PY{n}{startswith}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{\PYZsh{}}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}\PY{p}{]}\PY{p}{)}
+             \PY{k}{return} \PY{n}{hash\PYZus{}list}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}17}]:} \PY{k}{def} \PY{n+nf}{split\PYZus{}hashtag\PYZus{}to\PYZus{}words}\PY{p}{(}\PY{n}{tag}\PY{p}{)}\PY{p}{:}
+             \PY{n}{word\PYZus{}list} \PY{o}{=} \PY{p}{[}\PY{n}{w} \PY{k}{for} \PY{n}{w} \PY{o+ow}{in} \PY{n}{e}\PY{o}{.}\PY{n}{segment}\PY{p}{(}\PY{n}{tag}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{:}\PY{p}{]}\PY{p}{)} \PY{k}{if} \PY{n+nb}{len}\PY{p}{(}\PY{n}{w}\PY{p}{)} \PY{o}{\PYZgt{}} \PY{l+m+mi}{3}\PY{p}{]}
+             \PY{k}{return} \PY{n}{word\PYZus{}list}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}18}]:} \PY{k}{def} \PY{n+nf}{clean\PYZus{}hashtag}\PY{p}{(}\PY{n}{text}\PY{p}{)}\PY{p}{:}
+             \PY{n}{words} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+             \PY{n}{tag\PYZus{}list} \PY{o}{=} \PY{n}{extract\PYZus{}hashtag}\PY{p}{(}\PY{n}{text}\PY{p}{)}
+             \PY{k}{for} \PY{n}{tag} \PY{o+ow}{in} \PY{n}{tag\PYZus{}list}\PY{p}{:}
+                 \PY{n}{words} \PY{o}{+}\PY{o}{=} \PY{n}{split\PYZus{}hashtag\PYZus{}to\PYZus{}words}\PY{p}{(}\PY{n}{tag}\PY{p}{)}
+             \PY{k}{if} \PY{n+nb}{len}\PY{p}{(}\PY{n}{words}\PY{p}{)}\PY{p}{:}
+                 \PY{k}{return} \PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{ }\PY{l+s+s2}{\PYZdq{}}\PY{o}{.}\PY{n}{join}\PY{p}{(}\PY{n}{words}\PY{p}{)}\PY{p}{)}\PY{o}{.}\PY{n}{strip}\PY{p}{(}\PY{p}{)}
+             \PY{k}{else}\PY{p}{:}
+                 \PY{k}{return} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{\PYZdq{}}
+             \PY{k}{return} \PY{n}{word\PYZus{}list}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}20}]:} \PY{n}{clean\PYZus{}hashtag}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{yay ! ! \PYZsh{}lifecompleted . tweet / facebook}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}20}]:} 'life completed'
+\end{Verbatim}
+            
+    \# Remove Number
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}21}]:} \PY{k}{def} \PY{n+nf}{remove\PYZus{}number}\PY{p}{(}\PY{n}{text}\PY{p}{)}\PY{p}{:}
+             \PY{n}{new\PYZus{}tweet} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+             \PY{k}{for} \PY{n}{word} \PY{o+ow}{in} \PY{n}{text}\PY{o}{.}\PY{n}{split}\PY{p}{(}\PY{p}{)}\PY{p}{:}
+                 \PY{k}{try}\PY{p}{:}
+                     \PY{n+nb}{float}\PY{p}{(}\PY{n}{word}\PY{p}{)}
+                     \PY{n}{new\PYZus{}tweet}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+                 \PY{k}{except}\PY{p}{:}
+                     \PY{n}{new\PYZus{}tweet}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{word}\PY{p}{)}
+             \PY{k}{return} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{ }\PY{l+s+s2}{\PYZdq{}}\PY{o}{.}\PY{n}{join}\PY{p}{(}\PY{n}{new\PYZus{}tweet}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}22}]:} \PY{n}{remove\PYZus{}number}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{hello he scored 993}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}22}]:} 'hello he scored '
+\end{Verbatim}
+            
+    \# Spelling corretion
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}23}]:} \PY{n+nb}{dict} \PY{o}{=} \PY{p}{\PYZob{}}\PY{p}{\PYZcb{}}
+         
+         \PY{n}{corpus1} \PY{o}{=} \PY{n+nb}{open}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{data/dictionary/tweet\PYZus{}typo\PYZus{}corpus.txt}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{rb}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{k}{for} \PY{n}{term} \PY{o+ow}{in} \PY{n}{corpus1}\PY{p}{:}
+             \PY{n}{term} \PY{o}{=} \PY{n}{term}\PY{o}{.}\PY{n}{decode}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{utf8}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{o}{.}\PY{n}{split}\PY{p}{(}\PY{p}{)}
+             \PY{n+nb}{dict}\PY{p}{[}\PY{n}{term}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{]} \PY{o}{=} \PY{n}{term}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}
+         
+         \PY{n}{corpus2} \PY{o}{=} \PY{n+nb}{open}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{data/dictionary/text\PYZus{}correction.txt}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{rb}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{k}{for} \PY{n}{term} \PY{o+ow}{in} \PY{n}{corpus2}\PY{p}{:}
+             \PY{n}{term} \PY{o}{=} \PY{n}{term}\PY{o}{.}\PY{n}{decode}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{utf8}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{o}{.}\PY{n}{split}\PY{p}{(}\PY{p}{)}
+             \PY{n+nb}{dict}\PY{p}{[}\PY{n}{term}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{]} \PY{o}{=} \PY{n}{term}\PY{p}{[}\PY{l+m+mi}{3}\PY{p}{]}
+         
+         
+         \PY{k}{def} \PY{n+nf}{spelling\PYZus{}correction}\PY{p}{(}\PY{n}{text}\PY{p}{)}\PY{p}{:}
+             \PY{n}{text} \PY{o}{=} \PY{n}{text}\PY{o}{.}\PY{n}{split}\PY{p}{(}\PY{p}{)}
+             \PY{k}{for} \PY{n}{idx} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n+nb}{len}\PY{p}{(}\PY{n}{text}\PY{p}{)}\PY{p}{)}\PY{p}{:}
+                 \PY{k}{if} \PY{n}{text}\PY{p}{[}\PY{n}{idx}\PY{p}{]} \PY{o+ow}{in} \PY{n+nb}{dict}\PY{o}{.}\PY{n}{keys}\PY{p}{(}\PY{p}{)}\PY{p}{:}
+                     \PY{n}{text}\PY{p}{[}\PY{n}{idx}\PY{p}{]} \PY{o}{=} \PY{n+nb}{dict}\PY{p}{[}\PY{n}{text}\PY{p}{[}\PY{n}{idx}\PY{p}{]}\PY{p}{]}
+             \PY{n}{text} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{ }\PY{l+s+s1}{\PYZsq{}}\PY{o}{.}\PY{n}{join}\PY{p}{(}\PY{n}{text}\PY{p}{)}
+             \PY{k}{return} \PY{n}{text}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}27}]:} \PY{n}{spelling\PYZus{}correction}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{hey! you are fab}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}27}]:} 'hey! you are fabulous'
+\end{Verbatim}
+            
+    \# Removing Stopwords
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}28}]:} \PY{n}{stoplist} \PY{o}{=} \PY{n}{stopwords}\PY{o}{.}\PY{n}{words}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{english}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         
+         \PY{k}{def} \PY{n+nf}{remove\PYZus{}stopwords}\PY{p}{(}\PY{n}{text}\PY{p}{)}\PY{p}{:}
+             \PY{n}{tokens} \PY{o}{=} \PY{n}{text}\PY{o}{.}\PY{n}{split}\PY{p}{(}\PY{p}{)}
+             \PY{k}{for} \PY{n}{word} \PY{o+ow}{in} \PY{n}{tokens}\PY{p}{:}
+                 \PY{k}{if} \PY{n}{word} \PY{o+ow}{in} \PY{n}{stoplist}\PY{p}{:}
+                     \PY{n}{tokens}\PY{o}{.}\PY{n}{remove}\PY{p}{(}\PY{n}{word}\PY{p}{)}
+             \PY{k}{return} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{ }\PY{l+s+s1}{\PYZsq{}}\PY{o}{.}\PY{n}{join}\PY{p}{(}\PY{n}{tokens}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}29}]:} \PY{n}{remove\PYZus{}stopwords}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{hey! you are fab}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}29}]:} 'hey! are fab'
+\end{Verbatim}
+            
+    \# Lemmatization
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}30}]:} \PY{n}{lemma} \PY{o}{=} \PY{n}{WordNetLemmatizer}\PY{p}{(}\PY{p}{)}
+         \PY{k}{def} \PY{n+nf}{lemmatize\PYZus{}word}\PY{p}{(}\PY{n}{w}\PY{p}{)}\PY{p}{:}
+             \PY{k}{try}\PY{p}{:}
+                 \PY{n}{x} \PY{o}{=} \PY{n}{lemma}\PY{o}{.}\PY{n}{lemmatize}\PY{p}{(}\PY{n}{w}\PY{p}{)}\PY{o}{.}\PY{n}{lower}\PY{p}{(}\PY{p}{)}
+                 \PY{k}{return} \PY{n}{x}
+             \PY{k}{except} \PY{n+ne}{Exception} \PY{k}{as} \PY{n}{e}\PY{p}{:}
+                 \PY{k}{return} \PY{n}{w}
+         
+         
+         \PY{k}{def} \PY{n+nf}{lemmatize\PYZus{}sentence}\PY{p}{(}\PY{n}{text}\PY{p}{)}\PY{p}{:}
+             \PY{n}{x} \PY{o}{=} \PY{p}{[}\PY{n}{lemmatize\PYZus{}word}\PY{p}{(}\PY{n}{t}\PY{p}{)} \PY{k}{for} \PY{n}{t} \PY{o+ow}{in} \PY{n}{text}\PY{o}{.}\PY{n}{split}\PY{p}{(}\PY{p}{)}\PY{p}{]}
+             \PY{k}{return} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{ }\PY{l+s+s2}{\PYZdq{}}\PY{o}{.}\PY{n}{join}\PY{p}{(}\PY{n}{x}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}33}]:} \PY{n}{lemmatize\PYZus{}word}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{laurie}\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{s gardening design protective decal skin}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}33}]:} "laurie's gardening design protective decal skin"
+\end{Verbatim}
+            
+    \# Stemming
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}34}]:} \PY{n}{stemmer} \PY{o}{=} \PY{n}{PorterStemmer}\PY{p}{(}\PY{p}{)}
+         \PY{k}{def} \PY{n+nf}{stemming\PYZus{}word}\PY{p}{(}\PY{n}{w}\PY{p}{)}\PY{p}{:}
+             \PY{k}{return} \PY{n}{stemmer}\PY{o}{.}\PY{n}{stem}\PY{p}{(}\PY{n}{w}\PY{p}{)}
+         
+         
+         \PY{k}{def} \PY{n+nf}{stemming\PYZus{}sentence}\PY{p}{(}\PY{n}{text}\PY{p}{)}\PY{p}{:}
+             \PY{n}{x} \PY{o}{=} \PY{p}{[}\PY{n}{stemming\PYZus{}word}\PY{p}{(}\PY{n}{t}\PY{p}{)} \PY{k}{for} \PY{n}{t} \PY{o+ow}{in} \PY{n}{text}\PY{o}{.}\PY{n}{split}\PY{p}{(}\PY{p}{)}\PY{p}{]}
+             \PY{k}{return} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{ }\PY{l+s+s2}{\PYZdq{}}\PY{o}{.}\PY{n}{join}\PY{p}{(}\PY{n}{x}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}35}]:} \PY{n}{stemming\PYZus{}sentence}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{laurie}\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{s gardening design protective decal skin}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}35}]:} "laurie' garden design protect decal skin"
+\end{Verbatim}
+            
+    Combining all preprocessing method
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}38}]:} \PY{k}{def} \PY{n+nf}{preprocessing\PYZus{}all\PYZus{}method}\PY{p}{(}\PY{n}{tweet}\PY{p}{)}\PY{p}{:}
+             \PY{n}{tweet} \PY{o}{=} \PY{n}{abbreviation\PYZus{}replacement}\PY{p}{(}\PY{n}{tweet}\PY{p}{)}
+             \PY{n}{tweet} \PY{o}{=} \PY{n}{emphaszie\PYZus{}punctuation}\PY{p}{(}\PY{n}{tweet}\PY{p}{)}
+             \PY{n}{tweet} \PY{o}{=} \PY{n}{tweet} \PY{o}{+} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{ }\PY{l+s+s1}{\PYZsq{}} \PY{o}{+} \PY{n}{clean\PYZus{}hashtag}\PY{p}{(}\PY{n}{tweet}\PY{p}{)}
+             \PY{n}{tweet} \PY{o}{=} \PY{n}{emoji\PYZus{}translation}\PY{p}{(}\PY{n}{tweet}\PY{p}{)}
+             \PY{n}{tweet} \PY{o}{=} \PY{n}{remove\PYZus{}number}\PY{p}{(}\PY{n}{tweet}\PY{p}{)}
+             \PY{n}{tweet} \PY{o}{=} \PY{n}{emphasize\PYZus{}pos\PYZus{}and\PYZus{}neg\PYZus{}words}\PY{p}{(}\PY{n}{tweet}\PY{p}{)}
+             \PY{n}{tweet} \PY{o}{=} \PY{n}{spelling\PYZus{}correction}\PY{p}{(}\PY{n}{tweet}\PY{p}{)}
+             \PY{n}{tweet} \PY{o}{=} \PY{n}{remove\PYZus{}stopwords}\PY{p}{(}\PY{n}{tweet}\PY{p}{)}
+             \PY{n}{tweet} \PY{o}{=} \PY{n}{stemming\PYZus{}sentence}\PY{p}{(}\PY{n}{tweet}\PY{p}{)}
+             \PY{n}{tweet} \PY{o}{=} \PY{n}{lemmatize\PYZus{}sentence}\PY{p}{(}\PY{n}{tweet}\PY{p}{)}
+             \PY{k}{return} \PY{n}{tweet}\PY{o}{.}\PY{n}{strip}\PY{p}{(}\PY{p}{)}\PY{o}{.}\PY{n}{lower}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}39}]:} \PY{n}{preprocessing\PYZus{}all\PYZus{}method}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{laurie}\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{s gardening design protective decal skin}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}39}]:} "laurie' garden design <positive> protect deal skin"
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}40}]:} \PY{c+c1}{\PYZsh{} Paralelize Pandas datafames}
+         \PY{k}{def} \PY{n+nf}{parallelize\PYZus{}dataframe}\PY{p}{(}\PY{n}{df}\PY{p}{,} \PY{n}{func}\PY{p}{)}\PY{p}{:}
+             \PY{n}{df\PYZus{}split} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{array\PYZus{}split}\PY{p}{(}\PY{n}{df}\PY{p}{,} \PY{n}{num\PYZus{}partitions}\PY{p}{)}
+             \PY{n}{pool} \PY{o}{=} \PY{n}{Pool}\PY{p}{(}\PY{n}{num\PYZus{}cores}\PY{p}{)}
+             \PY{n}{df} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{concat}\PY{p}{(}\PY{n}{pool}\PY{o}{.}\PY{n}{map}\PY{p}{(}\PY{n}{func}\PY{p}{,} \PY{n}{df\PYZus{}split}\PY{p}{)}\PY{p}{)}
+             \PY{n}{pool}\PY{o}{.}\PY{n}{close}\PY{p}{(}\PY{p}{)}
+             \PY{n}{pool}\PY{o}{.}\PY{n}{join}\PY{p}{(}\PY{p}{)}
+             \PY{k}{return} \PY{n}{df}
+         
+         \PY{k}{def} \PY{n+nf}{multiply\PYZus{}columns}\PY{p}{(}\PY{n}{data}\PY{p}{)}\PY{p}{:}
+             \PY{n}{data}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{tweet}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{n}{data}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{tweet}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{apply}\PY{p}{(}\PY{k}{lambda} \PY{n}{x}\PY{p}{:} \PY{n}{preprocessing\PYZus{}all\PYZus{}method}\PY{p}{(}\PY{n}{x}\PY{p}{)}\PY{p}{)}
+             \PY{k}{return} \PY{n}{data}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}41}]:} \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Test data preprocessing start!}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         \PY{n}{X\PYZus{}test} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{read\PYZus{}pickle}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{data/pickles/test\PYZus{}origin.pkl}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         \PY{n}{X\PYZus{}test} \PY{o}{=} \PY{n}{parallelize\PYZus{}dataframe}\PY{p}{(}\PY{n}{X\PYZus{}test}\PY{p}{,} \PY{n}{multiply\PYZus{}columns}\PY{p}{)}
+         \PY{n}{X\PYZus{}test}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Test data preprocessing start!
+
+    \end{Verbatim}
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}41}]:}                                                   tweet
+         0     sea pro sea scooter \textbackslash{}( sport the <positive> po{\ldots}
+         1     <user> shuck <positive> well <positive> work w{\ldots}
+         2              cant stay away <negative> bug that' babi
+         3     <user> madam ! <repeat> ! <repeat> ! <repeat> {\ldots}
+         4     whenev <negative> fall asleep watch televis , {\ldots}
+         5     <user> need get rip that thing ! <repeat> scar{\ldots}
+         6     whatev \textbackslash{}. <repeat> a <negative> terribl mood \textbackslash{}{\ldots}
+         7     ye ! <repeat> <user> <user> thank jordan , <po{\ldots}
+         8     friend <user> text to check on last night \textbackslash{}. <{\ldots}
+         9     <user> \#followback pleas \textbackslash{}. <repeat> will \#uni{\ldots}
+         10    watch of y'all <negative> dumb ass get lock to{\ldots}
+         11    obsess \#phasel <user> <negative> kill ! <repea{\ldots}
+         12    <user> robert niro not gay \textbackslash{}. <repeat> \textbackslash{}. <rep{\ldots}
+         13    <user> canada to grade \textbackslash{}. <repeat> sinc dont g{\ldots}
+         14    <user> pleas say hi denmark ! <repeat> would <{\ldots}
+         15                                           final home
+         16    3x3 custom pictur frame / poster frame \textbackslash{}. <rep{\ldots}
+         17    / to new follow \textbackslash{}. <repeat> mention for follow{\ldots}
+         18    <user> ye , look <positive> like <positive> be{\ldots}
+         19    nhl' bettman : suspens <negative> critic ' gam{\ldots}
+         20    <user> way am pro <user> lol is <negative> rub{\ldots}
+         21    barrel pickl \textbackslash{}( \textbackslash{}. <repeat> pound german pickl{\ldots}
+         22    complet whole cup tea today jessica' is first {\ldots}
+         23    expo precis point whiteboard eras \textbackslash{}( 473kf \textbackslash{}) {\ldots}
+         24    \#yougetmajorpointsif play soccer \textbackslash{}. <repeat> i{\ldots}
+         25    task essenti har leather scribe keeper \textbackslash{}( size{\ldots}
+         26    <user> \#needtoreesthisshit \#shouldhavereaditwi{\ldots}
+         27    <user> hahahaha , come , ton blanket , cat the{\ldots}
+         28    laurie' garden design <positive> protect deal {\ldots}
+         29    <user> way is mine ! <repeat> ! <repeat> ! <re{\ldots}
+         {\ldots}                                                 {\ldots}
+         9970  is <positive> clear these new goth learn danc {\ldots}
+         9971  is <positive> clear these new goth learn danc {\ldots}
+         9972  anoth day home <negative> sick , thi over alreadi
+         9973  <user> your wee <positive> golden nugget simme{\ldots}
+         9974  <user> disney movi <positive> classic film wil{\ldots}
+         9975  09x30 custom pictur frame / poster frame \textbackslash{}. <r{\ldots}
+         9976  09x30 custom pictur frame / poster frame \textbackslash{}. <r{\ldots}
+         9977       <user> <positive> glad arriv <positive> safe
+         9978  gonna care your not go either am go be <positi{\ldots}
+         9979  monk - season four \textbackslash{}( return the scene the <ne{\ldots}
+         9980  want wish <positive> beauti cousin <user> <pos{\ldots}
+         9981                    <user> first rule sex , is rule
+         9982  stay darla , , <user> know hahaha <user> you r{\ldots}
+         9983  <user> " <user> <negative> embarrass thing tha{\ldots}
+         9984  <positive> wonder <user> ever \#followback \textbackslash{}? <{\ldots}
+         9985  <positive> wonder <user> ever \#followback \textbackslash{}? <{\ldots}
+         9986  anaheim duck cake cupcak topper \textbackslash{}( pack qualit{\ldots}
+         9987         shootout <user> go follow guy ! <repeat> x
+         9988  <user> \textbackslash{}. <repeat> \textbackslash{}. <repeat> <positive> good{\ldots}
+         9989  youar <positive> welcom \textbackslash{}. <repeat> bruce , te{\ldots}
+         9990     <user> follow back pleas ! <repeat> ! <repeat>
+         9991  <user> omg ! <repeat> scream the end ! <repeat{\ldots}
+         9992  aww is disappoint i cant make own usernam pott{\ldots}
+         9993                  <user> thankyouu po ! <repeat> \textbackslash{})
+         9994  <user> am <negative> afraid youar come back a {\ldots}
+         9995            a <positive> nice time / friend lastnit
+         9996     <user> it not ! <repeat> pleas stop ! <repeat>
+         9997  without daughter \textbackslash{}( two-tim oscar \textbackslash{}( \textbackslash{}) <posit{\ldots}
+         9998             <user> <positive> fun class sweetcheek
+         9999  make \textbackslash{}. <repeat> e \textbackslash{}. <repeat> \textbackslash{}. <repeat> l \textbackslash{}{\ldots}
+         
+         [10000 rows x 1 columns]
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}42}]:} \PY{n}{X\PYZus{}test}\PY{o}{.}\PY{n}{to\PYZus{}pickle}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{data/pickles/test\PYZus{}clean.pkl}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Test data preprocessing finish!}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Test data preprocessing finish!
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}44}]:} \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Train data preprocessing start!}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         \PY{n}{X\PYZus{}train} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{read\PYZus{}pickle}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{data/pickles/train\PYZus{}origin.pkl}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         \PY{n}{X\PYZus{}train} \PY{o}{=} \PY{n}{parallelize\PYZus{}dataframe}\PY{p}{(}\PY{n}{X\PYZus{}train}\PY{p}{,} \PY{n}{multiply\PYZus{}columns}\PY{p}{)}
+         \PY{n}{X\PYZus{}train}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Train data preprocessing start!
+
+    \end{Verbatim}
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}44}]:}                                                  tweet
+         0    <user> dunno justin read mention not \textbackslash{}. <repea{\ldots}
+         1    your logic so <negative> dumb , wonot even cro{\ldots}
+         2    " <user> put casper a box ! <repeat> " love ba{\ldots}
+         3    <user> <user> thank sir > > dont trip littl ma{\ldots}
+         4    visit brother tomorrow the bestest birthday gi{\ldots}
+         5    <user> <positive> may ! <repeat> ! <repeat> \#l{\ldots}
+         6    <user> \#1dnextalbumtitl : feel you / <negative{\ldots}
+         7    work <negative> hard hardli work <user> hardee{\ldots}
+         8    <user> saw \textbackslash{}. <repeat> be repli a bit \textbackslash{}. <repeat>
+         9                                          is i belong
+         10   <user> to <positive> cheer \#nationals2013 \textbackslash{}? <{\ldots}
+         11   send invit shop on-lin ! <repeat> find everyth{\ldots}
+         12                              woke , finna go church
+         13              <user> agre ! <repeat> day left though
+         14                                      monet katemelo
+         15   <positive> like damn <user> lexi got lot say y{\ldots}
+         16   <positive> grate today a dream fulfil ! <repea{\ldots}
+         17                   <user> home affair shall it later
+         18              barca to beat real madrid saturday doe
+         19   <user> lot part asia \textbackslash{}. <repeat> especi rat li{\ldots}
+         20   <user> <user> wasnot even sleep \textbackslash{}. <repeat> sh{\ldots}
+         21   have world <positive> best dad \textbackslash{}. <repeat> <love>
+         22   <user> <user> jaeyay werna meet khatam hi hoja{\ldots}
+         23         <user> one <negative> doubt abil ! <repeat>
+         24   <user> check tweet pictur \textbackslash{}. <repeat> wa outfi{\ldots}
+         25   got mid-term i <positive> impress ! <repeat> !{\ldots}
+         26   summer day : \textbackslash{}. <repeat> \textbackslash{}) <positive> work 10{\ldots}
+         27   <user> lot \textbackslash{}. <repeat> \textbackslash{}. <repeat> food your f{\ldots}
+         28   <user> \#16millionbritneyfan and tweet million {\ldots}
+         29   <user> serious though \textbackslash{}. <repeat> \textbackslash{}. <repeat> {\ldots}
+         ..                                                 {\ldots}
+         970                             <user> look quot googl
+         971  older get , more see power that young woman , {\ldots}
+         972  the smith at <positive> work \textbackslash{}. <repeat> <nega{\ldots}
+         973  <user> oh <positive> right see :' \textbackslash{}) time it \textbackslash{}{\ldots}
+         974  <user> <user> a boy \textbackslash{}. <repeat> next time come{\ldots}
+         975                   shhhshhsshhhshut <negative> fuck
+         976  <user> thank the follow guy sound <positive> amaz
+         977     my headphon on , am my dream world \textbackslash{}. <repeat>
+         978  <user> just make feel <positive> like effort o{\ldots}
+         979  <user> oh cours lot \#ourwholeuniversewasinahot{\ldots}
+         980  <user> ctfuu , could said <happy> \& tell i sai{\ldots}
+         981  <user> phone never notifi of repli ! <repeat> {\ldots}
+         982  <user> <user> <user> lantaran si kar eh \textbackslash{}. <re{\ldots}
+         983                       <user> <user> total agre viv
+         984  <user> yeah <positive> thank \textbackslash{}) night , see th{\ldots}
+         985  <user> youar <positive> love hunger game as i {\ldots}
+         986  <user> could ask follow \textbackslash{}? <repeat> would <pos{\ldots}
+         987  chill matt brittani stay <positive> strong <love>
+         988                          either so <positive> cute
+         989  <positive> may best haven't seen year come see{\ldots}
+         990  <user> ftsk announc <negative> warp tour \textbackslash{}? <r{\ldots}
+         991           nf brother girlfriend <user> follow back
+         992                                            g'night
+         993            <positive> readi start cosmo ! <repeat>
+         994      <user> told mum is pug a babi - warm the idea
+         995  <user> i havenot spent , still got i plan spen{\ldots}
+         996  actual <positive> like singl , mean \#ridingsol{\ldots}
+         997                                       then , uniqu
+         998  are sale \$ \textbackslash{}. <repeat> ! <repeat> <positive> a{\ldots}
+         999                                    day no selfharm
+         
+         [1000 rows x 1 columns]
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{n}{X\PYZus{}train}\PY{o}{.}\PY{n}{to\PYZus{}pickle}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{data/pickles/train\PYZus{}clean.pkl}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+        \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Train data preprocessing finish!}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+
+    % Add a bibliography block to the postdoc
+    
+    
+    
+    \end{document}

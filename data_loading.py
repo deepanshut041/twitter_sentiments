@@ -13,10 +13,12 @@ def gen_data():
     pos_train_tweets = pd.DataFrame(load_data('data/tweets/train_pos_full.txt'), columns=['tweet'])
     neg_train_tweets = pd.DataFrame(load_data('data/tweets/train_neg_full.txt'), columns=['tweet'])
     train_tweets = pd.concat([pos_train_tweets, neg_train_tweets], axis=0)
+    print(train_tweets)
     train_tweets.to_pickle('data/pickles/train_origin.pkl')
 
     test_tweets = pd.DataFrame(load_data('data/tweets/test_data.txt'), columns=['tweet'])
     test_tweets['tweet'] = test_tweets['tweet'].apply(lambda tweet: tweet.split(',', 1)[-1])
+    print(test_tweets)
     test_tweets.to_pickle('data/pickles/test_origin.pkl')
 
 

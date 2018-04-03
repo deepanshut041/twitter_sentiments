@@ -281,13 +281,13 @@ def run_preprocessing():
     print("Test data preprocessing start!")
     X_test = pd.read_pickle("data/pickles/test_origin.pkl")
     X_test = parallelize_dataframe(X_test, multiply_columns)
-    X_test.to_pickle("test_clean.pkl")
+    X_test.to_pickle("data/pickles/test_clean.pkl")
     print("Test data preprocessing finish!")
 
     print("Train data preprocessing start!")
     X_train = pd.read_pickle("data/pickles/train_origin.pkl")
     X_train = parallelize_dataframe(X_train, multiply_columns)
-    X_train.to_pickle("train_clean.pkl")
+    X_train.to_pickle("data/pickles/train_clean.pkl")
     print("Train data preprocessing finish!")
 
 

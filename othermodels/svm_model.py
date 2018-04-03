@@ -4,18 +4,18 @@ import csv
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn import svm
 
-train_tweets = pd.read_pickle('train_tweets_after_preprocess.pkl')
-test_tweets = pd.read_pickle('test_tweets_after_preprocess.pkl')
+train_tweets = pd.read_pickle("/data/pickels/train_clean.pkl")
+test_tweets = pd.read_pickle("../data/pickels/test_clean.pkl")
 
 # Transform data into tfidf vector
 def transform_tfidf_vector(train_tweets, test_tweets):
     tfidf = TfidfVectorizer(min_df=1, max_df=1, sublinear_tf=True, use_idf=True, ngram_range=(1, 2))
 
     train_reptweets = tfidf.fit_transform(train_tweets['tweet'])
-    pickle.dump(train_reptweets, open('train_reptweets.pkl', 'wb'))
+    pickle.dump(train_reptweets, open('../data/pickels/train_reptweets.pkl', 'wb'))
 
     test_reptweets = tfidf.transform(test_tweets['tweet'])
-    pickle.dump(test_reptweets, open('test_reptweets.pkl', 'wb'))
+    pickle.dump(test_reptweets, open('../data/pickels/test_reptweets.pkl', 'wb'))
     return train_reptweets, test_reptweets
 
 train_reptweets, test_reptweets = transform_tfidf_vector(train_tweets, test_tweets)
@@ -32,7 +32,7 @@ pred = model.predict(test_reptweets)
 print("Prediction finished!")
 
 # Generating csv file
-with open('svm_submission.csv', 'w') as file:
+with open('../data/svm_submission.csv', 'w') as file:
     fieldnames = ['Id', 'Prediction']
     writeFile = csv.DictWriter(file, delimiter=",", fieldnames=fieldnames)
     writeFile.writeheader()
